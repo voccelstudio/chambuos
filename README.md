@@ -25,6 +25,19 @@ npx serve .
 
 Luego visita `http://localhost:8000`.
 
+## CSS estatico (performance)
+
+No se usa el CDN de Tailwind en runtime (compilaba CSS en el navegador, lo que enlentecia la UI). El CSS esta precompilado en `assets/css/tailwind.css`.
+
+Si agregas/cambias clases de Tailwind, regenera el CSS:
+
+```bash
+npm install
+npm run build:css
+```
+
+Ojo: las clases dinamicas de `assets/js/app.js` estan incluidas en la busqueda (`tailwind.config.js` → `content`).
+
 ## Deploy
 
 El workflow en `.github/workflows/pages.yml` publica la rama `main` en GitHub Pages automaticamente en cada push.
@@ -36,5 +49,5 @@ Pasos una sola vez:
 
 ## Stack
 
-- HTML + Tailwind CSS (CDN), vanilla JavaScript.
+- HTML + Tailwind CSS (compilado estatico), vanilla JavaScript.
 - Diseno base: "Artisan Hospitality Suite" (`stitch_restaurant_management_system`).

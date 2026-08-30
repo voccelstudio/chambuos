@@ -1,0 +1,12 @@
+{
+  "name": "chambuos",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Chambú Kitchen & Bar - restaurant management web app",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
