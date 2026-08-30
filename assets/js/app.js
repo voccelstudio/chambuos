@@ -39,6 +39,31 @@
     setTimeout(function () { el.remove(); }, 2150);
   }
 
+  function storeGet(key, fallback) {
+    try {
+      var v = JSON.parse(localStorage.getItem(key) || 'null');
+      return v === null ? fallback : v;
+    } catch (e) { return fallback; }
+  }
+
+  function storeSet(key, val) {
+    localStorage.setItem(key, JSON.stringify(val));
+  }
+
+  function modalShow(id) {
+    var m = $(id);
+    if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+  }
+
+  function modalHide(id) {
+    var m = $(id);
+    if (m) { m.classList.add('hidden'); m.classList.remove('flex'); }
+  }
+
+  $$('[data-close-modal]').forEach(function (b) {
+    b.addEventListener('click', function () { modalHide('#' + b.getAttribute('data-close-modal')); });
+  });
+
   /* ---- Shared layout (injected into [data-layout-sidebar]/[data-layout-topbar]) ---- */
   function navLink(l) {
     var active = l.page === currentPage ? ' nav-active' : '';
@@ -96,6 +121,119 @@
   });
 
   /* =========================================================
+   * Reservations (index.html) — find & seat, new walk-in
+   * ========================================================= */
+  function reservationsApp() {
+    var STORE = 'chambu_reservations';
+    var list = $('#resList');
+    var search = $('#resSearch');
+
+    function load() {
+      var r = storeGet(STORE, null);
+      if (r === null) {
+        r = [
+          { id: 'r1', guest: 'Mr. Vance', party: 2, table: 'B2', time: 'Seated', note: 'VIP — welcome drink' },
+          { id: 'r2', guest: 'M. Reyes', party: 3, table: 'T3', time: 'Seated', note: 'Split bill 3 ways' },
+          { id: 'r3', guest: 'Patel group', party: 4, table: 'T1', time: '7:30 PM', note: 'Window seat' }
+        ];
+        storeSet(STORE, r);
+      }
+      return r;
+    }
+    function save(r) { storeSet(STORE, r); }
+
+    function markTableReserved(t) {
+      $$('[data-table-open]').forEach(function (el) {
+        if (el.getAttribute('data-table-open') !== t) return;
+        el.classList.remove('table-available');
+        el.classList.add('table-occupied');
+        if (!$('.res-flag', el)) {
+          var flag = document.createElement('div');
+          flag.className = 'res-flag font-label-sm text-label-sm mt-1';
+          flag.textContent = 'Reserved';
+          el.appendChild(flag);
+        }
+      });
+    }
+
+    function render() {
+      var q = (search && search.value ? search.value.toLowerCase() : '');
+      var hits = load().filter(function (x) {
+        if (!q) return true;
+        return (x.guest.toLowerCase().indexOf(q) !== -1) || (String(x.table).toLowerCase().indexOf(q) !== -1);
+      });
+      var empty = $('#resEmpty');
+      list.innerHTML = '';
+      if (!hits.length) {
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      hits.forEach(function (res) {
+        var row = document.createElement('div');
+        row.className = 'glass-panel rounded-xl p-4 border border-outline-variant/10 flex items-center justify-between gap-3';
+        row.innerHTML =
+          '<div class="min-w-0">' +
+            '<div class="font-title-lg text-title-lg text-primary"></div>' +
+            '<div class="font-label-sm text-label-sm text-on-surface-variant mt-1"></div>' +
+            '<div class="font-label-sm text-label-sm text-on-surface-variant mt-1"></div>' +
+          '</div>' +
+          '<div class="flex flex-col gap-2 shrink-0">' +
+            '<button class="h-9 px-4 bg-primary-container text-on-primary-container font-label-sm text-label-sm rounded-lg uppercase tracking-wide hover:bg-primary transition-colors" data-seat-res="' + res.id + '">Seat</button>' +
+            '<button class="h-9 px-4 border border-outline-variant text-on-surface-variant font-label-sm text-label-sm rounded-lg uppercase tracking-wide hover:border-error hover:text-error transition-colors" data-del-res="' + res.id + '">Cancel</button>' +
+          '</div>';
+        row.children[0].children[0].textContent = res.guest;
+        row.children[0].children[1].textContent = res.party + ' guests • Table ' + res.table + (res.time ? ' • ' + res.time : '');
+        row.children[0].children[2].textContent = res.note || '';
+        list.appendChild(row);
+      });
+    }
+
+    load().forEach(function (r) { markTableReserved(r.table); });
+
+    document.addEventListener('click', function (e) {
+      var seatBtn = e.target.closest('[data-seat-res]');
+      if (seatBtn) {
+        var byId = load().filter(function (x) { return x.id === seatBtn.getAttribute('data-seat-res'); })[0];
+        if (byId) {
+          save(load().filter(function (x) { return x.id !== byId.id; }));
+          localStorage.setItem('chambu_reservations_seated', byId.table);
+          location.href = 'pos.html?table=' + encodeURIComponent(byId.table);
+        }
+        return;
+      }
+      var delBtn = e.target.closest('[data-del-res]');
+      if (delBtn) {
+        save(load().filter(function (x) { return x.id !== delBtn.getAttribute('data-del-res'); }));
+        render();
+        showToast('Reservation cancelled', true);
+      }
+    });
+
+    $('#btnFindRes').addEventListener('click', function () { render(); modalShow('#resModal'); });
+    $('#btnWalkIn').addEventListener('click', function () { modalShow('#walkInModal'); });
+    if (search) search.addEventListener('input', render);
+
+    $('#btnSaveWalkIn').addEventListener('click', function () {
+      var guest = $('#wiName').value.trim();
+      var party = parseInt($('#wiParty').value, 10) || 1;
+      var table = $('#wiTable').value;
+      if (!guest) { showToast('Enter a guest name', false); return; }
+      var r = load();
+      r.unshift({ id: 'r' + Date.now(), guest: guest, party: party, table: table, time: 'Seated', note: 'Walk-in' });
+      save(r);
+      markTableReserved(table);
+      showToast(guest + ' seated at ' + table, true);
+      modalHide('#walkInModal');
+      $('#wiName').value = '';
+    });
+
+    $('#resModal').addEventListener('click', function (e) { if (e.target === this) modalHide('#resModal'); });
+    $('#walkInModal').addEventListener('click', function (e) { if (e.target === this) modalHide('#walkInModal'); });
+  }
+  if ($('#btnFindRes')) reservationsApp();
+
+  /* =========================================================
    * Menu Editor (menu.html) — section tabs + search
    * ========================================================= */
   function menuFilter() {
@@ -143,8 +281,9 @@
    * ========================================================= */
   function inventoryApp() {
     var tabs = $$('[data-inv-filter]');
-    var cards = $$('[data-category]');
     var search = $('#invSearch');
+
+    function cards() { return $$('[data-category]'); }
 
     function activeVal() {
       var t = $('[data-inv-filter].active');
@@ -155,7 +294,7 @@
       var active = activeVal();
       var q = (search && search.value ? search.value.toLowerCase() : '');
 
-      cards.forEach(function (card) {
+      cards().forEach(function (card) {
         var cat = card.getAttribute('data-category');
         var stock = parseFloat(card.getAttribute('data-stock') || '0');
         var name = (card.getAttribute('data-search-text') || '').toLowerCase();
@@ -176,52 +315,285 @@
     });
 
     if (search) search.addEventListener('input', apply);
-
-    $$('.restock-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var card = btn.closest('[data-category]');
-        if (!card) return;
-        var stock = parseFloat(card.getAttribute('data-stock') || '0');
-        var next = stock + 5;
-        card.setAttribute('data-stock', String(next));
-        var display = $('.stock-count', card);
-        if (display) display.textContent = next;
-        var badge = $('[data-stock-state]', card);
-        if (badge) {
-          badge.textContent = 'IN STOCK';
-          badge.className = 'px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm';
-        }
-        card.classList.remove('border-error/30');
-      });
-    });
   }
   if ($('[data-inv-filter]')) inventoryApp();
 
   /* =========================================================
    * Menu Editor (menu.html) — availability toggle
    * ========================================================= */
+  function toggleAvail(label) {
+    var track = $('div', label);
+    var knob = $('div > div', label);
+    var txt = $('.avail-label', label);
+    if (txt.textContent === "86'd") {
+      track.classList.remove('bg-surface-container-highest');
+      track.classList.add('bg-tertiary-container');
+      knob.style.left = '20px';
+      txt.textContent = 'Available';
+      txt.classList.remove('text-on-surface-variant');
+      txt.classList.add('text-on-surface');
+    } else {
+      track.classList.remove('bg-tertiary-container');
+      track.classList.add('bg-surface-container-highest');
+      knob.style.left = '4px';
+      txt.textContent = "86'd";
+      txt.classList.remove('text-on-surface');
+      txt.classList.add('text-on-surface-variant');
+    }
+  }
+
   $$('.avail-toggle').forEach(function (label) {
-    label.addEventListener('click', function () {
-      var track = $('div', label);
-      var knob = $('div > div', label);
-      var txt = $('.avail-label', label);
-      if (txt.textContent === "86'd") {
-        track.classList.remove('bg-surface-container-highest');
-        track.classList.add('bg-tertiary-container');
-        knob.style.left = '20px';
-        txt.textContent = 'Available';
-        txt.classList.remove('text-on-surface-variant');
-        txt.classList.add('text-on-surface');
-      } else {
-        track.classList.remove('bg-tertiary-container');
-        track.classList.add('bg-surface-container-highest');
-        knob.style.left = '4px';
-        txt.textContent = "86'd";
-        txt.classList.remove('text-on-surface');
-        txt.classList.add('text-on-surface-variant');
-      }
-    });
+    label.addEventListener('click', function () { toggleAvail(label); });
   });
+
+  /* =========================================================
+   * Menu Editor (menu.html) — add / delete menu items
+   * ========================================================= */
+  function menuItemsApp() {
+    var STORE_ITEMS = 'chambu_menu_items';
+    var STORE_DEL = 'chambu_menu_deleted';
+    var items = storeGet(STORE_ITEMS, []);
+    var deleted = storeGet(STORE_DEL, []);
+
+    $$('[data-name]').forEach(function (card) {
+      if (deleted.indexOf(card.getAttribute('data-name')) !== -1) card.style.display = 'none';
+    });
+
+    function renderCard(it) {
+      var section = $('[data-menu-section="' + it.cat + '"]');
+      var grid = section ? $('.grid', section) : null;
+      if (!grid) return;
+      var card = document.createElement('div');
+      card.className = 'bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-outline-variant/30 transition-all flex flex-col';
+      card.setAttribute('data-name', it.name);
+      card.setAttribute('data-category', it.cat);
+      card.setAttribute('data-search', it.name.toLowerCase());
+      card.setAttribute('data-dynamic', '1');
+      card.innerHTML =
+        '<div class="h-32 bg-surface-container-high flex items-center justify-center">' +
+          '<span class="material-symbols-outlined text-4xl text-primary">restaurant</span>' +
+        '</div>' +
+        '<div class="p-4 flex-1 flex flex-col">' +
+          '<div class="flex justify-between items-start mb-2">' +
+            '<h4 class="font-title-lg text-title-lg text-primary line-clamp-1"></h4>' +
+            '<span class="font-title-lg text-title-lg text-primary-fixed"></span>' +
+          '</div>' +
+          '<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4 flex-1"></p>' +
+          '<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">' +
+            '<label class="flex items-center gap-2 cursor-pointer avail-toggle">' +
+              '<div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">' +
+                '<div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>' +
+              '</div>' +
+              '<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>' +
+            '</label>' +
+            '<button class="menu-del text-on-surface-variant hover:text-error transition-colors" title="Delete item">' +
+              '<span class="material-symbols-outlined text-[20px]">delete</span>' +
+            '</button>' +
+          '</div>' +
+        '</div>';
+      $('h4', card).textContent = it.name;
+      $('.text-primary-fixed', card).textContent = '$' + Number(it.price).toFixed(0);
+      $('p[class*="line-clamp-2"]', card).textContent = it.desc || '';
+      grid.appendChild(card);
+      $('.avail-toggle', card).addEventListener('click', function () { toggleAvail($('.avail-toggle', card)); });
+    }
+
+    items.forEach(function (it) { renderCard(it); });
+
+    $$('[data-name]').forEach(function (card) {
+      if ($('.menu-del', card)) return;
+      var actionRow = card.querySelector('.flex.items-center.justify-between.mt-auto') || card;
+      var delBtn = document.createElement('button');
+      delBtn.className = 'menu-del text-on-surface-variant hover:text-error transition-colors ml-2';
+      delBtn.title = 'Delete item';
+      delBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">delete</span>';
+      actionRow.appendChild(delBtn);
+    });
+
+    document.addEventListener('click', function (e) {
+      var del = e.target.closest('.menu-del');
+      if (!del) return;
+      var card = del.closest('[data-name]');
+      if (!card) return;
+      var name = card.getAttribute('data-name');
+      var wasDynamic = card.getAttribute('data-dynamic') === '1';
+      if (wasDynamic) {
+        var idx = -1;
+        items.forEach(function (it, i) { if (it.name === name) idx = i; });
+        if (idx !== -1) items.splice(idx, 1);
+        storeSet(STORE_ITEMS, items);
+      } else {
+        deleted.push(name);
+        storeSet(STORE_DEL, deleted);
+      }
+      card.remove();
+      showToast('Removed "' + name + '"', true);
+    });
+
+    $('#btnNewItem').addEventListener('click', function () { modalShow('#menuItemModal'); });
+
+    $('#miSave').addEventListener('click', function () {
+      var name = $('#miName').value.trim();
+      var price = parseFloat($('#miPrice').value);
+      var cat = $('#miCat').value;
+      var desc = $('#miDesc').value.trim();
+      if (!name || isNaN(price) || price <= 0) { showToast('Enter a name and a price', false); return; }
+      var it = { name: name, price: price, cat: cat, desc: desc };
+      items.push(it);
+      storeSet(STORE_ITEMS, items);
+      renderCard(it);
+      modalHide('#menuItemModal');
+      $('#miName').value = ''; $('#miPrice').value = ''; $('#miDesc').value = '';
+      var activeTab = $('[data-menu-tab].active');
+      if (activeTab && activeTab.getAttribute('data-menu-tab') !== 'all') activeTab.click();
+      showToast('Added "' + name + '" to ' + cat, true);
+    });
+  }
+  if ($('#btnNewItem')) menuItemsApp();
+
+  /* =========================================================
+   * Bar & Inventory (inventory.html) — add / delete / restock
+   * ========================================================= */
+  function inventoryItemsApp() {
+    var STORE_ITEMS = 'chambu_inventory_items';
+    var STORE_DEL = 'chambu_inventory_deleted';
+    var STORE_STOCK = 'chambu_inventory_stock';
+    var items = storeGet(STORE_ITEMS, []);
+    var deleted = storeGet(STORE_DEL, []);
+    var stockOver = storeGet(STORE_STOCK, {});
+
+    function setStock(card, n) {
+      card.setAttribute('data-stock', String(n));
+      var d = $('.stock-count', card);
+      if (d) d.textContent = n;
+      var state = $('[data-stock-state][class*="rounded"]:last-child', card) || $('[data-stock-state]', card);
+      var badge = state;
+      if (badge) {
+        badge.textContent = n <= 3 ? 'LOW STOCK' : 'IN STOCK';
+        badge.className = n <= 3
+          ? 'px-2 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm animate-pulse'
+          : 'px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm';
+        card.classList.remove('border-error/30');
+        if (n <= 3) card.classList.add('border-error/30');
+      }
+    }
+
+    $$('[data-category]').forEach(function (card) {
+      var name = ($('h3', card) || { textContent: '' }).textContent || '';
+      if (deleted.indexOf(name) !== -1) { card.style.display = 'none'; return; }
+      if (stockOver.hasOwnProperty(name)) setStock(card, stockOver[name]);
+    });
+
+    function renderCard(it) {
+      var grid = $('#invGrid');
+      if (!grid) return;
+      var low = it.stock <= 3;
+      var card = document.createElement('div');
+      card.className = 'glass-panel rounded-xl p-4 flex flex-col gap-4 hover:border-primary-container/50 transition-colors group';
+      card.setAttribute('data-category', it.cat);
+      card.setAttribute('data-stock', String(it.stock));
+      card.setAttribute('data-search-text', (it.name + ' ' + it.cat + ' ' + it.unit).toLowerCase());
+      card.setAttribute('data-dynamic', '1');
+      card.innerHTML =
+        '<div class="flex justify-between items-start">' +
+          '<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant/20 flex items-center justify-center">' +
+            '<span class="material-symbols-outlined text-on-surface-variant">inventory_2</span>' +
+          '</div>' +
+          '<div class="flex items-center gap-2">' +
+            '<span class="px-2 py-1 rounded font-label-sm text-label-sm ' + (low ? 'bg-error-container text-on-error-container animate-pulse' : 'bg-surface-container-highest text-on-surface-variant') + '" data-stock-state>' + (low ? 'LOW STOCK' : 'IN STOCK') + '</span>' +
+            '<button class="inv-del text-on-surface-variant hover:text-error transition-colors" title="Delete item">' +
+              '<span class="material-symbols-outlined text-[18px]">close</span>' +
+            '</button>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<h3 class="font-title-lg text-title-lg text-primary truncate mb-1"></h3>' +
+          '<p class="font-body-md text-body-md text-on-surface-variant"></p>' +
+        '</div>' +
+        '<div class="flex justify-between items-end mt-auto pt-4 border-t border-outline-variant/10">' +
+          '<div>' +
+            '<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">IN STOCK</div>' +
+            '<div class="font-headline-md text-headline-md text-primary-container leading-none stock-count"></div>' +
+          '</div>' +
+          '<button class="restock-btn h-8 px-3 bg-primary-container text-on-primary-container font-label-sm text-label-sm rounded flex items-center justify-center hover:bg-primary transition-colors">Quick Restock</button>' +
+        '</div>';
+      $('h3', card).textContent = it.name;
+      $('p[class*="text-on-surface-variant"]', card).textContent = it.unit || '';
+      $('.stock-count', card).textContent = it.stock + ' ' + (it.unitNote || 'pcs');
+      grid.appendChild(card);
+      if (low) setStock(card, it.stock);
+    }
+
+    items.forEach(function (it) {
+      var un = (it.unit || '').replace(/[0-9]/g, '').trim() || 'pcs';
+      it.unitNote = un;
+      renderCard(it);
+    });
+
+    $$('[data-category]').forEach(function (card) {
+      if ($('.inv-del', card)) return;
+      var head = card.querySelector('.flex.justify-between.items-start');
+      if (!head) return;
+      var delBtn = document.createElement('button');
+      delBtn.className = 'inv-del text-on-surface-variant hover:text-error transition-colors';
+      delBtn.title = 'Delete item';
+      delBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">close</span>';
+      head.appendChild(delBtn);
+    });
+
+    document.addEventListener('click', function (e) {
+      var del = e.target.closest('.inv-del');
+      if (!del) return;
+      var card = del.closest('[data-category]');
+      if (!card) return;
+      var name = ($('h3', card) || { textContent: '' }).textContent;
+      var wasDynamic = card.getAttribute('data-dynamic') === '1';
+      if (wasDynamic) {
+        var idx = -1;
+        items.forEach(function (it, i) { if (it.name === name) idx = i; });
+        if (idx !== -1) items.splice(idx, 1);
+        storeSet(STORE_ITEMS, items);
+      } else if (name) {
+        deleted.push(name);
+        storeSet(STORE_DEL, deleted);
+      }
+      card.remove();
+      showToast('Removed "' + name + '"', true);
+    });
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.restock-btn');
+      if (!btn) return;
+      var card = btn.closest('[data-category]');
+      if (!card) return;
+      var name = ($('h3', card) || { textContent: '' }).textContent;
+      var stock = parseFloat(card.getAttribute('data-stock') || '0');
+      var next = stock + 5;
+      setStock(card, next);
+      if (name) { stockOver[name] = next; storeSet(STORE_STOCK, stockOver); }
+      showToast('Restocked "' + name + '" (+5)', true);
+    });
+
+    $('#btnAddItem').addEventListener('click', function () { modalShow('#invItemModal'); });
+
+    $('#invSave').addEventListener('click', function () {
+      var name = $('#invName').value.trim();
+      var cat = $('#invCat').value;
+      var stock = parseFloat($('#invStock').value);
+      if (!name || isNaN(stock) || stock < 0) { showToast('Enter a name and a valid stock', false); return; }
+      var unit = $('#invUnit').value.trim() || 'pcs';
+      var it = { name: name, cat: cat, stock: stock, unit: unit, unitNote: unit.replace(/[0-9]/g, '').trim() || 'pcs' };
+      items.push(it);
+      storeSet(STORE_ITEMS, items);
+      renderCard(it);
+      modalHide('#invItemModal');
+      $('#invName').value = ''; $('#invStock').value = ''; $('#invUnit').value = '';
+      var activeTab = $('[data-inv-filter].active');
+      if (activeTab && activeTab.getAttribute('data-inv-filter') !== 'all') activeTab.click();
+      showToast('Added "' + name + '"', true);
+    });
+  }
+  if ($('#btnAddItem') && $('#invGrid')) inventoryItemsApp();
 
   function getSettings() {
     var d = { restaurant: 'Chambú Kitchen & Bar', tax: 8.5, service: 18 };
@@ -277,7 +649,26 @@
       document.title = 'Table ' + table + ' - Chambú Kitchen & Bar';
     }
 
+    /* Ensure every ticket line has a remove control */
+    $$('[data-price]').forEach(function (it) {
+      if ($('.item-remove', it)) return;
+      var col = $('.text-right.ml-4', it);
+      if (!col) return;
+      var btn = document.createElement('button');
+      btn.className = 'item-remove block mt-2 text-on-surface-variant hover:text-error transition-colors material-symbols-outlined text-[18px]';
+      btn.title = 'Remove';
+      btn.textContent = 'close';
+      col.appendChild(btn);
+      btn.addEventListener('click', function () { it.remove(); recalc(); });
+    });
+
     /* Add item to ticket */
+    [$('#newItemName'), $('#newItemPrice')].forEach(function (el) {
+      if (!el) return;
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') $('#btnAddItem').click();
+      });
+    });
     $('#btnAddItem').addEventListener('click', function () {
       var nameEl = $('#newItemName');
       var priceEl = $('#newItemPrice');
@@ -295,7 +686,7 @@
           '</div>' +
           '<div class="text-right ml-4">' +
             '<span class="font-body-lg text-body-lg text-primary"></span>' +
-            '<button class="block mt-2 text-on-surface-variant hover:text-error transition-colors material-symbols-outlined text-[18px]" title="Remove">close</button>' +
+            '<button class="block mt-2 text-on-surface-variant hover:text-error transition-colors material-symbols-outlined text-[18px] item-remove" title="Remove">close</button>' +
           '</div>' +
         '</div>';
       $('h3', item).textContent = name;
@@ -425,9 +816,14 @@
     function save(o) { localStorage.setItem('chambu_orders', JSON.stringify(o)); }
 
     function seed() {
-      if (load()) return;
+      if (load() && load().length) return;
+      localStorage.setItem('chambu_ticket_next', '8904');
       var now = Date.now();
-      save([
+      save(demoOrders(now));
+    }
+
+    function demoOrders(now) {
+      return [
         { id: '8901', table: '4', status: 'new', sent: now - 6 * 60000, items: [
           { name: 'Wagyu Ribeye 12oz', qty: 1, note: 'Medium Rare • No butter' },
           { name: 'Truffle Fries', qty: 1, note: 'Aioli on side' }
@@ -439,8 +835,7 @@
         { id: '8903', table: '12', status: 'ready', sent: now - 1 * 60000, items: [
           { name: 'Tiramisu', qty: 2, note: '' }
         ]}
-      ]);
-      localStorage.setItem('chambu_ticket_next', '8904');
+      ];
     }
 
     function render() {
@@ -498,6 +893,19 @@
 
     seed();
     render();
+
+    var demoBtn = $('#btnDemoOrders');
+    if (demoBtn) demoBtn.addEventListener('click', function () {
+      save(demoOrders(Date.now()));
+      render();
+      showToast('Demo orders loaded', true);
+    });
+
+    window.addEventListener('storage', function (e) {
+      if (e.key === 'chambu_orders') render();
+    });
+    setInterval(function () { render(); }, 3000);
+
     document.addEventListener('click', function (e) {
       var b = e.target.closest('[data-advance]');
       if (!b) return;

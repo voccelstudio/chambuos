@@ -29,7 +29,7 @@
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
 <input class="w-full sm:w-64 bg-surface-container-high border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="menuSearch" placeholder="Search menu items..." type="text"/>
 </div>
-<button class="bg-primary-container text-on-primary-container hover:bg-primary-container/90 h-touch-target px-6 rounded-full font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 transition-transform active:scale-95 shrink-0 shadow-lg shadow-primary-container/20">
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-container/90 h-touch-target px-6 rounded-full font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 transition-transform active:scale-95 shrink-0 shadow-lg shadow-primary-container/20" id="btnNewItem">
 <span class="material-symbols-outlined">add</span>
                     New Item
                 </button>
@@ -277,5 +277,47 @@
 </div>
 </div>
 </main>
+<!-- New Item Modal -->
+<div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="menuItemModal">
+<div class="w-full max-w-md bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-md text-headline-md text-primary">New Menu Item</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="menuItemModal"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-4">
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Item name</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="miName" type="text" placeholder="e.g. Short Rib Arepa"/>
+</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Price ($)</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="miPrice" type="number" min="0" step="0.5" placeholder="18"/>
+</label>
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Category</span>
+<select class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container transition-colors" id="miCat">
+<option value="starters">Starters</option>
+<option value="mains">Mains</option>
+<option value="desserts">Desserts</option>
+<option value="cocktails">Cocktails</option>
+<option value="seasonal">Seasonal Specials</option>
+</select>
+</label>
+</div>
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Description</span>
+<textarea class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors resize-none" id="miDesc" rows="2" placeholder="Short description"></textarea>
+</label>
+<div class="flex justify-end gap-3 pt-2">
+<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="menuItemModal">Cancel</button>
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 px-8 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg" id="miSave">
+<span class="material-symbols-outlined text-[18px] inline-block align-middle mr-1">save</span>
+                            Add item
+                        </button>
+</div>
+</div>
+</div>
+</div>
 <script src="assets/js/app.js"></script>
 </body></html>

@@ -79,11 +79,11 @@
 <h2 class="font-title-lg text-title-lg text-primary">Quick Actions</h2>
 </div>
 <div class="flex-1 p-6 space-y-4 overflow-y-auto">
-<button class="w-full h-touch-target bg-primary-container text-on-primary-fixed font-title-lg text-title-lg rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-colors active:scale-95 duration-100 shadow-md" data-table-open="New Walk-in">
+<button class="w-full h-touch-target bg-primary-container text-on-primary-fixed font-title-lg text-title-lg rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-colors active:scale-95 duration-100 shadow-md" id="btnWalkIn">
 <span class="material-symbols-outlined">add</span>
                         New Walk-in
                     </button>
-<button class="w-full h-touch-target bg-surface border border-outline-variant text-primary font-title-lg text-title-lg rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-colors active:scale-95 duration-100">
+<button class="w-full h-touch-target bg-surface border border-outline-variant text-primary font-title-lg text-title-lg rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-colors active:scale-95 duration-100" id="btnFindRes">
 <span class="material-symbols-outlined">search</span>
                         Find Reservation
                     </button>
@@ -111,5 +111,57 @@
 </aside>
 </div>
 </main>
+<!-- Reservation Modal -->
+<div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="resModal">
+<div class="w-full max-w-lg bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10 max-h-[85vh] overflow-y-auto">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-md text-headline-md text-primary">Reservations</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="resModal"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="relative mb-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="resSearch" placeholder="Search by guest or table..."/>
+</div>
+<div id="resList" class="space-y-3"></div>
+<p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="resEmpty">No reservations match.</p>
+</div>
+</div>
+<!-- Walk-in Modal -->
+<div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="walkInModal">
+<div class="w-full max-w-md bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-md text-headline-md text-primary">New Walk-in</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="walkInModal"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-4">
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Guest name</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="wiName" type="text" placeholder="Guest name"/>
+</label>
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Party size</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="wiParty" type="number" min="1" value="2"/>
+</label>
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Table</span>
+<select class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container transition-colors" id="wiTable">
+<option value="T1">T1</option>
+<option value="T2">T2</option>
+<option value="T3">T3</option>
+<option value="B1">B1</option>
+<option value="B2">B2</option>
+<option value="B3">B3</option>
+</select>
+</label>
+<div class="flex justify-end gap-3 pt-2">
+<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="walkInModal">Cancel</button>
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 px-8 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg" id="btnSaveWalkIn">
+<span class="material-symbols-outlined text-[18px] inline-block align-middle mr-1">chair</span>
+                            Seat guest
+                        </button>
+</div>
+</div>
+</div>
+</div>
 <script src="assets/js/app.js"></script>
 </body></html>

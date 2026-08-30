@@ -20,6 +20,24 @@ El sidebar y la barra superior son generados por `assets/js/app.js` (una sola fu
 marca, logo y enlaces). Cada pagina solo tiene `<div data-layout-sidebar>` y `<div data-layout-topbar>`.
 Para cambiar logo, nombre o links, edita las constantes `BRAND`, `LOGO` y `NAV` al inicio de `app.js`.
 
+## Datos locales
+
+El prototipo guarda todo en `localStorage` (sin servidor):
+
+| Clave                    | Uso                                             |
+| ------------------------ | ----------------------------------------------- |
+| `chambu_reservations`    | Reservas / walk-ins (Floor Map).                |
+| `chambu_menu_items`      | Items agregados en Menu Editor.                 |
+| `chambu_menu_deleted`    | Items del menu marcados como eliminados.        |
+| `chambu_inventory_items` | Items de stock agregados en Bar & Inventory.    |
+| `chambu_inventory_deleted` | Items de stock eliminados.                    |
+| `chambu_inventory_stock` | Overrides de stock tras Quick Restock.          |
+| `chambu_orders`          | Tickets enviados a Kitchen Display.             |
+| `chambu_ticket_next`     | Correlativo de tickets del POS.                 |
+| `chambu_settings`        | Nombre, impuesto y servicio (Settings).         |
+
+> Limpiar los datos del navegador reinicia el demo.
+
 ## Correr localmente
 
 Abre cualquiera de los `.html` directo en el navegador, o con un servidor estatico:
