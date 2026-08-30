@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html class="dark h-full" lang="en"><head>
+<html class="dark h-full" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chambú Kitchen &amp; Bar - Billing &amp; Payments</title>
+<title>Chambú Kitchen &amp; Bar - Cobros y Pagos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
@@ -25,16 +25,16 @@
 <!-- Header -->
 <div class="px-6 py-5 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container">
 <div>
-<h2 class="font-title-lg text-title-lg text-primary" id="ticketTitle">Table 42</h2>
-<p class="font-label-md text-label-md text-on-surface-variant mt-1" id="ticketMeta">Ticket #8902 • Server: Alex M.</p>
+<h2 class="font-title-lg text-title-lg text-primary" id="ticketTitle">Mesa 42</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1" id="ticketMeta">Ticket #8902 • Mesero: Alex M.</p>
 </div>
 <div class="bg-tertiary-container/10 text-tertiary-container px-3 py-1 rounded-full border border-tertiary-container/30" id="ticketStatus">
-<span class="font-label-md text-label-md">Open</span>
+<span class="font-label-md text-label-md">Abierto</span>
 </div>
 </div>
 <!-- Party size -->
 <div class="px-4 py-3 border-b border-outline-variant/10 flex items-center justify-between">
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider flex items-center gap-2"><span class="material-symbols-outlined">groups</span>People at table</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider flex items-center gap-2"><span class="material-symbols-outlined">groups</span>Personas en la mesa</span>
 <div class="flex items-center gap-2">
 <button class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-center transition-colors" id="btnPartyMinus" aria-label="Remove one person"><span class="material-symbols-outlined text-[18px]">remove</span></button>
 <span class="w-8 text-center font-title-lg text-title-lg text-primary" id="partyCount">2</span>
@@ -44,7 +44,7 @@
 <!-- Quick Add -->
 <div class="px-4 py-3 border-b border-outline-variant/10 flex gap-2">
 <div class="flex-1">
-<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="newItemName" placeholder="Quick add item..." type="text"/>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="newItemName" placeholder="Agregar item rápido..." type="text"/>
 </div>
 <div class="w-24">
 <input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="newItemPrice" placeholder="0.00" type="number" min="0" step="0.01"/>
@@ -111,16 +111,16 @@
 </div>
 <button class="w-full mb-3 bg-secondary-container/20 border border-secondary-container/30 text-secondary-container hover:bg-secondary-container/30 font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors flex items-center justify-center gap-2" id="btnSendOrder">
 <span class="material-symbols-outlined text-[18px]">oven_gen</span>
-                        Send to Kitchen
+                        Enviar a Cocina
                     </button>
 <div class="grid grid-cols-2 gap-3">
 <button class="bg-transparent border border-outline-variant hover:border-primary-container text-on-surface font-label-md text-label-md py-4 rounded-lg uppercase tracking-wider transition-colors flex items-center justify-center gap-2 h-touch-target" id="btnSplit">
 <span class="material-symbols-outlined text-[18px]">call_split</span>
-                            Split Bill
+                            Dividir Cuenta
                         </button>
 <button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-4 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg h-touch-target flex items-center justify-center gap-2" id="btnPayNow">
 <span class="material-symbols-outlined text-[18px]">credit_card</span>
-                            Pay Now
+Cobrar
                         </button>
 </div>
 </div>
@@ -130,8 +130,8 @@
 <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
 <div class="text-center">
 <span class="material-symbols-outlined text-6xl text-on-surface-variant/40 inline-block">payment</span>
-<h2 class="font-headline-lg text-headline-lg text-on-surface-variant mt-4">Select or open a ticket</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-md">Use the floor map or quick-add to start an order, then tap "Pay Now" to process the payment.</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface-variant mt-4">Seleccionar o abrir un ticket</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-md">Usa el mapa de piso o el agregar rápido para iniciar un pedido, luego toca "Cobrar" para procesar el pago.</p>
 </div>
 </section>
 </div>
@@ -141,18 +141,18 @@
 <div class="w-full max-w-2xl bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 shadow-2xl relative z-10 max-h-[90vh] overflow-y-auto" data-pay-stage>
 <div class="text-center mb-8">
 <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">contactless</span>
-<h2 class="font-headline-md text-headline-md text-primary">Awaiting Payment</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2">Tap, insert, or swipe card on terminal</p>
+<h2 class="font-headline-md text-headline-md text-primary">Esperando Pago</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Toca, inserta o desliza la tarjeta en la terminal</p>
 </div>
 <div class="grid grid-cols-3 gap-4 mb-8">
 <button class="bg-surface border-2 border-primary-container/50 hover:border-primary-container text-on-surface p-4 rounded-lg flex flex-col items-center justify-center gap-3 transition-all h-24 relative overflow-hidden group" data-pay-method="card">
 <div class="absolute inset-0 bg-primary-container/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
 <span class="material-symbols-outlined text-primary-container relative z-10">credit_card</span>
-<span class="font-label-md text-label-md relative z-10">Card</span>
+<span class="font-label-md text-label-md relative z-10">Tarjeta</span>
 </button>
 <button class="bg-surface border border-outline-variant/20 hover:border-outline-variant text-on-surface-variant hover:text-on-surface p-4 rounded-lg flex flex-col items-center justify-center gap-3 transition-all h-24" data-pay-method="cash">
 <span class="material-symbols-outlined">payments</span>
-<span class="font-label-md text-label-md">Cash</span>
+<span class="font-label-md text-label-md">Efectivo</span>
 </button>
 <button class="bg-surface border border-outline-variant/20 hover:border-outline-variant text-on-surface-variant hover:text-on-surface p-4 rounded-lg flex flex-col items-center justify-center gap-3 transition-all h-24" data-pay-method="gift">
 <span class="material-symbols-outlined">redeem</span>
@@ -161,7 +161,7 @@
 </div>
 <div class="bg-surface p-6 rounded-lg border border-outline-variant/10">
 <div class="flex justify-between items-center mb-4">
-<span class="font-body-lg text-body-lg text-on-surface-variant">Amount Due</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant">Monto a Pagar</span>
 <span class="font-title-lg text-title-lg text-primary" id="payAmount">Gs. 170,78</span>
 </div>
 <div class="w-full bg-surface-container-highest rounded-full h-1.5 mb-6 overflow-hidden">
@@ -169,10 +169,10 @@
 </div>
 <div class="flex gap-4">
 <button class="flex-1 bg-transparent border border-error/50 hover:border-error hover:bg-error/10 text-error font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors h-touch-target" id="btnCancelPay">
-                                Cancel
+                                Cancelar
                             </button>
 <button class="flex-1 bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors font-bold h-touch-target" id="btnProcessPay">
-                                Process Payment
+                                Procesar Pago
                             </button>
 </div>
 </div>
@@ -181,20 +181,20 @@
 <div class="hidden w-full max-w-2xl bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 shadow-2xl relative z-10" data-pay-stage>
 <div class="text-center">
 <span class="material-symbols-outlined text-6xl text-tertiary-fixed-dim inline-block">check_circle</span>
-<h2 class="font-headline-md text-headline-md text-primary mt-4">Payment Complete</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2">Tender: Card</p>
+<h2 class="font-headline-md text-headline-md text-primary mt-4">Pago Completo</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Pago: Tarjeta</p>
 <div class="mt-6 bg-surface p-6 rounded-lg border border-outline-variant/10">
 <div class="flex justify-between items-center">
-<span class="font-body-lg text-body-lg text-on-surface-variant">Total Paid</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant">Total Pagado</span>
 <span class="font-title-lg text-title-lg text-primary" id="payAmountSuccess">Gs. 170,78</span>
 </div>
 </div>
 <div class="flex gap-4 mt-8">
 <button class="flex-1 bg-transparent border border-outline-variant hover:border-outline text-on-surface font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors h-touch-target" id="btnCancelProcess">
-                                    Back
+                                    Volver
                                 </button>
 <button class="flex-1 bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors font-bold h-touch-target" id="btnNewOrder">
-                                    New Order
+                                    Nuevo Pedido
                                 </button>
 </div>
 </div>

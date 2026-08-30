@@ -6,15 +6,15 @@ Restaurant management web app. Runs entirely in the browser and is deployed to *
 
 | Pagina          | Archivo          | Descripcion                                             |
 | --------------- | ---------------- | ------------------------------------------------------- |
-| Floor Map       | `index.html`     | Mapa de mesas interactivo (abre un ticket en el POS).   |
-| POS & Billing   | `pos.html`       | Ticket (Gs., IVA incluido), personas por mesa, split bill, "Send to Kitchen" y flujo de pago (tarjeta/efectivo). |
-| Menu Editor     | `menu.html`      | Categorias, busqueda y alternar disponibilidad (86'd).  |
-| Bar & Inventory | `inventory.html` | Stock, filtros y Quick Restock.                         |
-| Shopping List   | `shopping.html` | Lista de compras de ingredientes (Cocina y Bar), con sugerencias de stock bajo. |
-| Kitchen Display | `kitchen.html`   | Tablero de cocina (New / In Progress / Ready / Done) alimentado por el POS. |
-| Analytics       | `analytics.html` | Data: mas vendidos, personas/tiempo por mesa y comparacion por mes. |
-| Settings        | `settings.html`  | Nombre del negocio (mostrado en el header).             |
-| Support         | `support.html`   | FAQ y reporte de issues en GitHub.                      |
+| Mapa de Mesas     | `index.html`     | Mapa de mesas interactivo (abre un ticket en el POS).   |
+| POS & Pago        | `pos.html`       | Ticket (Gs., IVA incluido), personas por mesa, split bill, "Enviar a cocina" y flujo de pago (tarjeta/efectivo). |
+| Editor de Menu    | `menu.html`      | Categorias, busqueda y alternar disponibilidad (agotado). |
+| Bar & Inventario  | `inventory.html` | Stock, filtros y reposiciones rapidas.                  |
+| Lista de Compras  | `shopping.html`  | Lista de compras de ingredientes (Cocina y Bar), con sugerencias de stock bajo. |
+| Pantalla de Cocina| `kitchen.html`   | Tablero de cocina (Nuevo / En Preparacion / Listo / Hecho) alimentado por el POS. |
+| Datos             | `analytics.html` | Data: mas vendidos, personas/tiempo por mesa y comparacion por mes. |
+| Configuracion     | `settings.html`  | Nombre del negocio (mostrado en el header).             |
+| Soporte           | `support.html`   | FAQ y reporte de issues en GitHub.                      |
 
 ## Nota: layout compartido
 

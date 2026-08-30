@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
+<html class="dark" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chambú Kitchen &amp; Bar - Menu Editor</title>
+<title>Chambú Kitchen &amp; Bar - Editor de Menú</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -21,17 +21,17 @@
 <!-- Canvas Header -->
 <header class="px-margin-mobile md:px-margin-desktop py-6 shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-surface/50 backdrop-blur-md sticky top-0 z-10 border-b border-outline-variant/10">
 <div>
-<h2 class="font-display-lg text-display-lg text-primary tracking-tight mb-2">Menu Editor</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Manage dishes, pricing, and availability across all menus.</p>
+<h2 class="font-display-lg text-display-lg text-primary tracking-tight mb-2">Editor de Menú</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Administra platos, precios y disponibilidad en todos los menús.</p>
 </div>
 <div class="flex items-center gap-3 w-full sm:w-auto">
 <div class="relative flex-1 sm:flex-none">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full sm:w-64 bg-surface-container-high border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="menuSearch" placeholder="Search menu items..." type="text"/>
+<input class="w-full sm:w-64 bg-surface-container-high border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="menuSearch" placeholder="Buscar items del menú..." type="text"/>
 </div>
 <button class="bg-primary-container text-on-primary-container hover:bg-primary-container/90 h-touch-target px-6 rounded-full font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 transition-transform active:scale-95 shrink-0 shadow-lg shadow-primary-container/20" id="btnNewItem">
 <span class="material-symbols-outlined">add</span>
-                    New Item
+Agregar Item
                 </button>
 </div>
 </header>
@@ -40,17 +40,17 @@
 <div class="max-w-7xl mx-auto space-y-12 pb-24">
 <!-- Categories Tabs -->
 <div class="flex items-center gap-2 overflow-x-auto pb-4 hide-scrollbar">
-<button class="filter-btn active px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="all">All Items</button>
-<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="starters">Starters</button>
-<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="mains">Mains</button>
-<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="desserts">Desserts</button>
+<button class="filter-btn active px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="all">Todos los Items</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="starters">Entradas</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="mains">Platos Fuertes</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="desserts">Postres</button>
 <button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="cocktails">Cocktails</button>
-<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="seasonal">Seasonal Specials</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="seasonal">Especiales de Temporada</button>
 </div>
 <!-- Section: Starters -->
 <section data-menu-section="starters">
 <div class="flex items-center justify-between mb-6 border-b border-outline-variant/20 pb-4">
-<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Starters</h3>
+<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Entradas</h3>
 <span class="bg-surface-container-high px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant">12 Items</span>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
@@ -74,7 +74,7 @@
 <div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
 <div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Disponible</span>
 </label>
 <button class="text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-[20px]">edit</span>
@@ -98,7 +98,7 @@
 <div class="relative w-10 h-5 bg-surface-container-highest rounded-full transition-colors">
 <div class="absolute left-1 top-0.5 w-4 h-4 bg-outline rounded-full shadow-sm transition-transform"></div>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant avail-label">86'd</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant avail-label">Agotado</span>
 </label>
 <button class="text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-[20px]">edit</span>
@@ -111,7 +111,7 @@
 <!-- Section: Mains -->
 <section data-menu-section="mains">
 <div class="flex items-center justify-between mb-6 border-b border-outline-variant/20 pb-4">
-<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Mains</h3>
+<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Platos Fuertes</h3>
 <span class="bg-surface-container-high px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant">8 Items</span>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
@@ -134,7 +134,7 @@
 <div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
 <div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Disponible</span>
 </label>
 <button class="text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-[20px]">edit</span>
@@ -158,7 +158,7 @@
 <div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
 <div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Disponible</span>
 </label>
 <button class="text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-[20px]">edit</span>
@@ -191,7 +191,7 @@
 <div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
 <div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Disponible</span>
 </label>
 <button class="text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-[20px]">edit</span>
@@ -216,7 +216,7 @@
 <div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
 <div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Disponible</span>
 </label>
 <button class="text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-[20px]">edit</span>
@@ -229,7 +229,7 @@
 <!-- Bento Grid Style for Specials Management -->
 <section data-menu-section="seasonal">
 <div class="flex items-center justify-between mb-6 border-b border-outline-variant/20 pb-4">
-<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Seasonal Management</h3>
+<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Gestión de Temporada</h3>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
 <!-- Add Seasonal Special Feature Box -->
@@ -238,27 +238,27 @@
 <div class="relative z-10 max-w-md">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/20 text-primary-container mb-4">
 <span class="material-symbols-outlined text-[16px]">campaign</span>
-<span class="font-label-sm text-label-sm">Autumn Menu Active</span>
+<span class="font-label-sm text-label-sm">Menú de Otoño Activo</span>
 </div>
-<h4 class="font-display-lg text-[32px] leading-tight text-primary mb-2">Curate the Season</h4>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6">Promote high-margin seasonal items or temporary specials across digital menus and POS instantly.</p>
+<h4 class="font-display-lg text-[32px] leading-tight text-primary mb-2">Cura la Temporada</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Promueve items estacionales de alto margen o especiales temporales en menús digitales y POS al instante.</p>
 <button class="bg-surface text-primary border border-outline-variant/30 hover:bg-surface-bright h-touch-target px-6 rounded-lg font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 transition-colors w-max">
 <span class="material-symbols-outlined">auto_awesome</span>
-                                    Generate Special
+                                    Generar Especial
                                 </button>
 </div>
 </div>
 <!-- Active Specials List -->
 <div class="bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col h-full">
 <div class="p-4 border-b border-outline-variant/10 bg-surface-container-high/50">
-<h4 class="font-title-lg text-title-lg text-primary">Active Specials</h4>
+<h4 class="font-title-lg text-title-lg text-primary">Especiales Activos</h4>
 </div>
 <div class="flex-1 overflow-y-auto p-2 space-y-2 hide-scrollbar">
 <div class="p-3 bg-surface rounded-lg border border-outline-variant/5 flex items-center gap-4 hover:border-outline-variant/20 transition-colors cursor-pointer group" data-name="Smoked Maple Old Fashioned Special">
 <div class="w-12 h-12 bg-surface-container-highest rounded-md shrink-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTfeiUDeJMFmfe1zsh4nELak1WmbzLKgOaTd0Bw_UuJ2Qoc11JCTT2ubeVvFIzCh2lg5ITDoE4eAMW-Q97tRUmTGwaxYa-LFrzCoz3PU5IOCxKh_ykd-zAQcOIhv6qPWnb0eQL4z5eMjzyH3w_QqokAM76aZjuXtF61jxlcThMN4LvLqbw_bt3oD6jiF7YiyE1bJFCbEihfrS63h9kOmO3YOVCdNDVv6DdKB3MlBMOqtIbIslRe12W')"></div>
 <div class="flex-1 min-w-0">
 <p class="font-label-md text-label-md text-primary truncate">Smoked Maple Old Fashioned</p>
-<p class="font-body-md text-[12px] text-on-surface-variant">Gs. 18 • Ends Nov 30</p>
+<p class="font-body-md text-[12px] text-on-surface-variant">Gs. 18 • Fin Nov 30</p>
 </div>
 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">more_vert</span>
 </div>
@@ -266,7 +266,7 @@
 <div class="w-12 h-12 bg-surface-container-highest rounded-md shrink-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBfPWpvi1jNgoNkkwWuxqZN64QArGzdqcw0zyp9RZOSzlL_iTVr5wMu5OdvO8PAE1tCC3BtN7jYec5vr_zMeK9_YRMaRRzQLOG7A98O4T_JfcVF93_7Z4joiIcZfBwfZHdRDdDhO-_3h9_38jiMeil300LojiihRnxnOwfrhf_quf_ICaGSWRLGWSyNYuku6dFaEw9EPv3Y72rqGgKHTThFTQNe5bZCS_jHe9YAKh-ICezzATq12Oh6')"></div>
 <div class="flex-1 min-w-0">
 <p class="font-label-md text-label-md text-primary truncate">Roasted Delicata Squash</p>
-<p class="font-body-md text-[12px] text-on-surface-variant">Gs. 16 • Ends Nov 30</p>
+<p class="font-body-md text-[12px] text-on-surface-variant">Gs. 16 • Fin Nov 30</p>
 </div>
 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">more_vert</span>
 </div>
@@ -281,39 +281,39 @@
 <div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="menuItemModal">
 <div class="w-full max-w-md bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10">
 <div class="flex justify-between items-center mb-4">
-<h2 class="font-headline-md text-headline-md text-primary">New Menu Item</h2>
+<h2 class="font-headline-md text-headline-md text-primary">Nuevo Item del Menú</h2>
 <button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="menuItemModal"><span class="material-symbols-outlined">close</span></button>
 </div>
 <div class="space-y-4">
 <label class="block">
-<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Item name</span>
-<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="miName" type="text" placeholder="e.g. Short Rib Arepa"/>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Nombre del item</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="miName" type="text" placeholder="ej. Short Rib Arepa"/>
 </label>
 <div class="grid grid-cols-2 gap-4">
 <label class="block">
-<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Price ($)</span>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Precio (Gs.)</span>
 <input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="miPrice" type="number" min="0" step="0.5" placeholder="18"/>
 </label>
 <label class="block">
-<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Category</span>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Categoría</span>
 <select class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container transition-colors" id="miCat">
-<option value="starters">Starters</option>
-<option value="mains">Mains</option>
-<option value="desserts">Desserts</option>
+<option value="starters">Entradas</option>
+<option value="mains">Platos Fuertes</option>
+<option value="desserts">Postres</option>
 <option value="cocktails">Cocktails</option>
-<option value="seasonal">Seasonal Specials</option>
+<option value="seasonal">Especiales de Temporada</option>
 </select>
 </label>
 </div>
 <label class="block">
-<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Description</span>
-<textarea class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors resize-none" id="miDesc" rows="2" placeholder="Short description"></textarea>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Descripción</span>
+<textarea class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors resize-none" id="miDesc" rows="2" placeholder="Descripción corta"></textarea>
 </label>
 <div class="flex justify-end gap-3 pt-2">
-<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="menuItemModal">Cancel</button>
+<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="menuItemModal">Cancelar</button>
 <button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 px-8 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg" id="miSave">
 <span class="material-symbols-outlined text-[18px] inline-block align-middle mr-1">save</span>
-                            Add item
+                            Agregar Item
                         </button>
 </div>
 </div>

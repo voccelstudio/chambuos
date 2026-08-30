@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
+<html class="dark" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chambú Kitchen &amp; Bar - Floor Map</title>
+<title>Chambú Kitchen &amp; Bar - Mapa de Mesas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="assets/css/tailwind.css" rel="stylesheet"/>
@@ -25,27 +25,27 @@
 <!-- Floor Plan -->
 <div class="relative w-[800px] h-[600px] border-2 border-outline-variant/20 rounded-xl p-8 bg-surface-container/50 backdrop-blur-sm">
 <!-- Zone Label -->
-<div class="absolute top-4 left-6 text-on-surface-variant font-label-md text-label-md tracking-widest uppercase">Main Dining Room</div>
+<div class="absolute top-4 left-6 text-on-surface-variant font-label-md text-label-md tracking-widest uppercase">Comedor Principal</div>
 <!-- Table 1 (Occupied) -->
 <div class="absolute top-20 left-20 w-32 h-32 rounded-full table-occupied border border-primary-fixed-dim/50 flex flex-col items-center justify-center shadow-lg cursor-pointer hover:border-primary-fixed-dim transition-colors" data-table-open="T1">
 <span class="font-title-lg text-title-lg text-primary">T1</span>
-<span class="font-label-sm text-label-sm mt-1 opacity-80">2/4 Seated</span>
+<span class="font-label-sm text-label-sm mt-1 opacity-80">2/4 Sentados</span>
 <span class="font-body-md text-body-md text-primary mt-2">Gs. 145</span>
 </div>
 <!-- Table 2 (Available) -->
 <div class="absolute top-20 left-64 w-32 h-32 rounded-lg bg-surface border-2 table-available flex flex-col items-center justify-center cursor-pointer hover:bg-surface-bright transition-colors" data-table-open="T2">
 <span class="font-title-lg text-title-lg">T2</span>
-<span class="font-label-sm text-label-sm mt-1 opacity-80">4 Seats</span>
+<span class="font-label-sm text-label-sm mt-1 opacity-80">4 Lugares</span>
 </div>
 <!-- Table 3 (Pending) -->
 <div class="absolute top-64 left-20 w-48 h-32 rounded-lg bg-surface border-2 table-pending flex flex-col items-center justify-center cursor-pointer hover:bg-surface-bright transition-colors" data-table-open="T3">
 <span class="font-title-lg text-title-lg">T3</span>
-<span class="font-label-sm text-label-sm mt-1 opacity-80 text-error">Paying</span>
+<span class="font-label-sm text-label-sm mt-1 opacity-80 text-error">Pagando</span>
 <span class="font-body-md text-body-md mt-2">Gs. 320,50</span>
 </div>
 <!-- Bar Area -->
 <div class="absolute right-12 top-12 bottom-12 w-24 bg-surface-container-high rounded-xl border border-outline-variant/30 flex flex-col items-center py-6 gap-6">
-<span class="font-label-md text-label-md text-on-surface-variant transform -rotate-90 origin-center whitespace-nowrap mb-8">THE BAR</span>
+<span class="font-label-md text-label-md text-on-surface-variant transform -rotate-90 origin-center whitespace-nowrap mb-8">LA BARRA</span>
 <div class="w-12 h-12 rounded-full bg-surface border-2 table-available flex items-center justify-center cursor-pointer" data-table-open="B1">
 <span class="font-label-md text-label-md">B1</span>
 </div>
@@ -61,51 +61,51 @@
 <div class="absolute bottom-8 left-8 flex gap-4 bg-surface-container-highest/80 backdrop-blur-md p-4 rounded-xl border border-outline-variant/20 shadow-2xl">
 <div class="flex items-center gap-2">
 <div class="w-4 h-4 rounded-sm border-2 table-available"></div>
-<span class="font-label-md text-label-md text-on-surface">Available</span>
+<span class="font-label-md text-label-md text-on-surface">Disponible</span>
 </div>
 <div class="flex items-center gap-2">
 <div class="w-4 h-4 rounded-sm table-occupied border border-primary-fixed-dim"></div>
-<span class="font-label-md text-label-md text-on-surface">Occupied</span>
+<span class="font-label-md text-label-md text-on-surface">Ocupada</span>
 </div>
 <div class="flex items-center gap-2">
 <div class="w-4 h-4 rounded-sm border-2 table-pending"></div>
-<span class="font-label-md text-label-md text-on-surface">Payment Pending</span>
+<span class="font-label-md text-label-md text-on-surface">Pago Pendiente</span>
 </div>
 </div>
 </div>
 <!-- Quick Actions Sidebar (Glassmorphism) -->
 <aside class="w-full lg:w-80 bg-surface-container/90 backdrop-blur-xl border-t lg:border-t-0 lg:border-l border-outline-variant/10 flex flex-col shrink-0">
 <div class="p-6 border-b border-outline-variant/10">
-<h2 class="font-title-lg text-title-lg text-primary">Quick Actions</h2>
+<h2 class="font-title-lg text-title-lg text-primary">Acciones Rápidas</h2>
 </div>
 <div class="flex-1 p-6 space-y-4 overflow-y-auto">
 <button class="w-full h-touch-target bg-primary-container text-on-primary-fixed font-title-lg text-title-lg rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-colors active:scale-95 duration-100 shadow-md" id="btnWalkIn">
 <span class="material-symbols-outlined">add</span>
-                        New Walk-in
+                        Nuevo Walk-in
                     </button>
 <button class="w-full h-touch-target bg-surface border border-outline-variant text-primary font-title-lg text-title-lg rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-colors active:scale-95 duration-100" id="btnFindRes">
 <span class="material-symbols-outlined">event_available</span>
-                        Reservations
+                        Reservas
                         <span class="bg-tertiary-container/20 text-tertiary-container text-body-sm font-bold rounded-full px-2 py-0.5" id="resCount">0</span>
                     </button>
 <div class="pt-6">
-<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-widest">Active Alerts</h3>
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-widest">Alertas Activas</h3>
 <!-- Alert Card -->
 <div class="bg-surface-container-high rounded-xl p-4 border-l-4 border-error mb-3">
 <div class="flex justify-between items-start mb-2">
-<span class="font-title-lg text-title-lg text-error">Table 3</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">10m ago</span>
+<span class="font-title-lg text-title-lg text-error">Mesa 3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hace 10m</span>
 </div>
-<p class="font-body-md text-body-md text-on-surface">Payment pending. Guest requested split bill (3 ways).</p>
-<button class="mt-3 text-primary font-label-md text-label-md hover:underline" data-table-open="T3">Process Payment</button>
+<p class="font-body-md text-body-md text-on-surface">Pago pendiente. El cliente solicitó dividir la cuenta (3 partes).</p>
+<button class="mt-3 text-primary font-label-md text-label-md hover:underline" data-table-open="T3">Procesar Pago</button>
 </div>
 <!-- VIP Alert -->
 <div class="bg-surface-container-high rounded-xl p-4 border-l-4 border-tertiary-fixed-dim mb-3">
 <div class="flex justify-between items-start mb-2">
 <span class="font-title-lg text-title-lg text-tertiary-fixed-dim">Bar 2</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Just now</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ahora mismo</span>
 </div>
-<p class="font-body-md text-body-md text-on-surface">VIP Guest (Mr. Vance) seated. Prepare standard welcome drink.</p>
+<p class="font-body-md text-body-md text-on-surface">Cliente VIP (Mr. Vance) sentado. Preparar bebida de bienvenida estándar.</p>
 </div>
 </div>
 </div>
@@ -116,35 +116,35 @@
 <div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="resModal">
 <div class="w-full max-w-lg bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10 max-h-[85vh] overflow-y-auto">
 <div class="flex justify-between items-center mb-4">
-<h2 class="font-headline-md text-headline-md text-primary">Reservations</h2>
+<h2 class="font-headline-md text-headline-md text-primary">Reservas</h2>
 <button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="resModal"><span class="material-symbols-outlined">close</span></button>
 </div>
 <div class="relative mb-4">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="resSearch" placeholder="Search by guest or table..."/>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="resSearch" placeholder="Buscar por cliente o mesa..."/>
 </div>
 <div id="resList" class="space-y-3"></div>
-<p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="resEmpty">No reservations match.</p>
+<p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="resEmpty">No se encontraron reservas.</p>
 </div>
 </div>
 <!-- Walk-in Modal -->
 <div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="walkInModal">
 <div class="w-full max-w-md bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10">
 <div class="flex justify-between items-center mb-4">
-<h2 class="font-headline-md text-headline-md text-primary">New Walk-in</h2>
+<h2 class="font-headline-md text-headline-md text-primary">Nuevo Walk-in</h2>
 <button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="walkInModal"><span class="material-symbols-outlined">close</span></button>
 </div>
 <div class="space-y-4">
 <label class="block">
-<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Guest name</span>
-<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="wiName" type="text" placeholder="Guest name"/>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Nombre del cliente</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="wiName" type="text" placeholder="Nombre del cliente"/>
 </label>
 <label class="block">
-<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Party size</span>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Tamaño del grupo</span>
 <input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="wiParty" type="number" min="1" value="2"/>
 </label>
 <label class="block">
-<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Table</span>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Mesa</span>
 <select class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container transition-colors" id="wiTable">
 <option value="T1">T1</option>
 <option value="T2">T2</option>
@@ -155,10 +155,10 @@
 </select>
 </label>
 <div class="flex justify-end gap-3 pt-2">
-<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="walkInModal">Cancel</button>
+<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="walkInModal">Cancelar</button>
 <button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 px-8 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg" id="btnSaveWalkIn">
 <span class="material-symbols-outlined text-[18px] inline-block align-middle mr-1">chair</span>
-                            Seat guest
+                            Sentar cliente
                         </button>
 </div>
 </div>
