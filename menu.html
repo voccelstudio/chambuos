@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chambú Kitchen &amp; Bar - Menu Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#201f1f",
+                        "on-surface-variant": "#ccc6ba",
+                        "on-secondary-fixed": "#410007",
+                        "on-secondary": "#660412",
+                        "secondary-fixed-dim": "#ffb3b0",
+                        "tertiary": "#ffffff",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed": "#ece2c9",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#a2d582",
+                        "surface-container-low": "#1c1b1b",
+                        "surface": "#131313",
+                        "on-tertiary-fixed-variant": "#26500d",
+                        "on-primary": "#35301f",
+                        "surface-bright": "#393939",
+                        "on-primary-fixed": "#201b0c",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#436f2a",
+                        "on-secondary-fixed-variant": "#861f25",
+                        "background": "#131313",
+                        "secondary-fixed": "#ffdad8",
+                        "surface-container-highest": "#353534",
+                        "on-primary-container": "#6b6450",
+                        "error-container": "#93000a",
+                        "primary": "#ffffff",
+                        "outline": "#959086",
+                        "on-primary-fixed-variant": "#4c4634",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#ece2c9",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary": "#133800",
+                        "surface-tint": "#cfc6ae",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary": "#ffb3b0",
+                        "tertiary-container": "#bdf19c",
+                        "outline-variant": "#4a463e",
+                        "on-tertiary-fixed": "#082100",
+                        "secondary-container": "#8a2227",
+                        "inverse-primary": "#645e4b",
+                        "on-secondary-container": "#ff9e9b",
+                        "primary-fixed-dim": "#cfc6ae",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#131313",
+                        "on-background": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "tertiary-fixed": "#bdf19c",
+                        "surface-container-high": "#2a2a2a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "touch-target": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "title-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Libre Caslon Text"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Libre Caslon Text"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased h-screen flex overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Web/Tablet) -->
+<nav class="hidden md:flex flex-col h-full w-64 py-base gap-2 bg-surface-container dark:bg-surface-container border-r border-outline-variant/10 shrink-0">
+<div class="px-4 py-6 flex items-center gap-4">
+<img alt="Chambú Logo" class="w-12 h-12 object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH7P9l8J12a9z0ISCCAfvZCLFxuHfN8EXe47ns3j0hKvjpIvv_1kXV04k6MTdHy_Ttm3eJKuv7B1SKh0giRvz57M9XnpLu0TGDJaH11gwh4CBsWULKs7a95m08bm_g0uPGnFOXZgr4zG_bM7iqIgnNl3jUhmjyg3uQJZ49tVZlSTSagbmwCbP8pvwSzDEDPvq8u2mF65p3KtrkcJnN2sUsnmUORDAbVb6eKd5AZdRZEACy_XjpUmz8P7NPD80M40CGtg"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary">Chambú</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Kitchen &amp; Bar</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-4 py-2 space-y-1 hide-scrollbar">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="index.html" href="index.html">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md text-label-md">Floor Map</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="pos.html" href="pos.html">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">POS &amp; Billing</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="menu.html" href="menu.html">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu Editor</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="inventory.html" href="inventory.html">
+<span class="material-symbols-outlined">liquor</span>
+<span class="font-label-md text-label-md">Bar &amp; Inventory</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">oven_gen</span>
+<span class="font-label-md text-label-md">Kitchen Display</span>
+</a>
+</div>
+<div class="px-4 py-4 space-y-1 mt-auto">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full bg-background overflow-hidden relative">
+<!-- TopNavBar (Mobile only) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-touch-target bg-surface dark:bg-surface border-b border-outline-variant/10 shrink-0">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary tracking-tight">Chambú Kitchen &amp; Bar</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary">
+<span class="material-symbols-outlined">notifications</span>
+<span class="material-symbols-outlined">person</span>
+</div>
+</header>
+<!-- Canvas Header -->
+<header class="px-margin-mobile md:px-margin-desktop py-6 shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-surface/50 backdrop-blur-md sticky top-0 z-10 border-b border-outline-variant/10">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary tracking-tight mb-2">Menu Editor</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage dishes, pricing, and availability across all menus.</p>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="relative flex-1 sm:flex-none">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full sm:w-64 bg-surface-container-high border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="menuSearch" placeholder="Search menu items..." type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-container/90 h-touch-target px-6 rounded-full font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 transition-transform active:scale-95 shrink-0 shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined">add</span>
+                    New Item
+                </button>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<div class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop py-8 hide-scrollbar">
+<div class="max-w-7xl mx-auto space-y-12 pb-24">
+<!-- Categories Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-4 hide-scrollbar">
+<button class="filter-btn active px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="all">All Items</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="starters">Starters</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="mains">Mains</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="desserts">Desserts</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="cocktails">Cocktails</button>
+<button class="filter-btn px-6 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md text-label-md whitespace-nowrap transition-colors" data-menu-tab="seasonal">Seasonal Specials</button>
+</div>
+<!-- Section: Starters -->
+<section data-menu-section="starters">
+<div class="flex items-center justify-between mb-6 border-b border-outline-variant/20 pb-4">
+<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Starters</h3>
+<span class="bg-surface-container-high px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant">12 Items</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-outline-variant/30 transition-all flex flex-col" data-name="Charred Heirloom Carrots" data-category="starters">
+<div class="h-40 bg-surface-container-high relative w-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBUYVTMoAvu0LJb9zdI4WIJZpHvWVvtEhURQ-CxlvtHS-UNItGqhncsnLVgdlMBdXNOmxPU3p4eRk6P2p0yaifmEk8SbUvxsrejdPpadwhkesqe6BPXIs9PK4iKfJJlyKPbCBzM3bmZfCAY2tCJ-4UrN2qWxKpX9azHRV3QDK81v-eToHBWpMtWIk3vxFXYyTwUmB_ecqVyXf4mSGw7UpNrJ_lacrdQV2hZ4ppccXUbSyCl6lrq2KcJ')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-80"></div>
+<div class="absolute top-3 right-3 flex gap-2">
+<span class="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded font-label-sm text-label-sm">V</span>
+<span class="bg-surface-container/80 backdrop-blur text-on-surface px-2 py-1 rounded font-label-sm text-label-sm border border-outline-variant/20">GF</span>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-title-lg text-title-lg text-primary line-clamp-1">Charred Heirloom Carrots</h4>
+<span class="font-title-lg text-title-lg text-primary-fixed">$14</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4 flex-1">Whipped ricotta, spiced honey, toasted pistachios, and fresh mint.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+<label class="flex items-center gap-2 cursor-pointer avail-toggle">
+<div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
+<div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+</label>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-outline-variant/30 transition-all flex flex-col" data-name="Wagyu Tartare" data-category="starters">
+<div class="h-40 bg-surface-container-high relative w-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDIK0VMPwZwPFPkPyAKQw-lX4M8ueoz74gXsXTjo0n2mSa3cniONXipQVh1yg8U2eIlBOxYPNK0jF9ZvGpqb-yAaIEyJkUviPqH-NR4_uL3T2hN-HIVEmydzH7OwZX6Y4ySccgOs0KrwGhZhWd53_NRNAzX7UKTOS1r7fkueKkqYF8ZH3ncrDFPk-hI42X9bAG05WippOd6L8LDT89HGq5eJ22UTiSEhLpyCN5L7UN4FvXGoATiVVHT')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-80"></div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-title-lg text-title-lg text-primary line-clamp-1">Wagyu Tartare</h4>
+<span class="font-title-lg text-title-lg text-primary-fixed">$22</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4 flex-1">Cured egg yolk, shallots, capers, truffle oil, and house-made potato crisps.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+<label class="flex items-center gap-2 cursor-pointer avail-toggle">
+<div class="relative w-10 h-5 bg-surface-container-highest rounded-full transition-colors">
+<div class="absolute left-1 top-0.5 w-4 h-4 bg-outline rounded-full shadow-sm transition-transform"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant avail-label">86'd</span>
+</label>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Mains -->
+<section data-menu-section="mains">
+<div class="flex items-center justify-between mb-6 border-b border-outline-variant/20 pb-4">
+<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Mains</h3>
+<span class="bg-surface-container-high px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant">8 Items</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-outline-variant/30 transition-all flex flex-col" data-name="Wagyu Ribeye 12oz" data-category="mains">
+<div class="h-40 bg-surface-container-high relative w-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5OID4nqH7kAozmCXHcaRmd3r5w7nI9RPSqz3NECzX8wP0cPAJmCrvcgQvN2dZ1FDBYqFw6lidHqPumUSBabFEQ2za4zBqBqBpWGcH1U6QrLrF7wR4mAkVcWAZN3kGziRbjMfWpX6mT8tL0ZAQKxCSHRTmLbtKvTkOxB6OZ7a9SqHhQhTbObDHLPJqWZg5p8V7rKHJ79gsrPzYINkwGlGYJ7hPgOXqf7j36i0XLz83H4fQh2XTB9QE2OJQ7EICk12BTp3KQWp0mM0S2xngV3ybHgpyRsJc2oLYvvGdNVfbZ5Sdq8V1vCLrSt3nAXsPRBwOJ4Y4N1i8VGqJ3YEMua6H2nP0N34H2JRUuu0iSzKqFW0P7ZiQ0ULyX0JXAxqO0y3QvhQS7QgLhP3F0YtT8Z7fFL1HxOqC2JjwsxUzvG0dxU2jLbKkq5cCq7mWOjI2r7sgFIMrtt2TL4')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-80"></div>
+<div class="absolute top-3 right-3 flex gap-2">
+<span class="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded font-label-sm text-label-sm">GF</span>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-title-lg text-title-lg text-primary line-clamp-1">Wagyu Ribeye 12oz</h4>
+<span class="font-title-lg text-title-lg text-primary-fixed">$85</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4 flex-1">Charcoal-grilled, smoked bone marrow butter, and roasted shallots.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+<label class="flex items-center gap-2 cursor-pointer avail-toggle">
+<div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
+<div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+</label>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-outline-variant/30 transition-all flex flex-col" data-name="Smoked Lamb Shoulder" data-category="mains">
+<div class="h-40 bg-surface-container-high relative w-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBx4v0iBSnJxTKICIZzAa67CF0uGqHZ4vSnZrN2WlE7PZNLdnQRk9iT4AKJAxKTBFdWUwMxsiO2L39j1x1K2wt5gY8WwQ5hW7YqDJwYwbhAcq2eKkCzVvS0sJ9IVRGRpa8ACcPJqI1z1n7z2ZqO0Y9hLjYUDadQivd8L0C7B3xuR4QwN9HkGqYRp0hGZjbRVb1J6eeY3dBoQ3Jm3O1w5QrFgTO1UYsE2sFfN7Hb7yWTTj0pR0JTIh2GTN5pZABkKbQ0LHbTXTmPIm3CoYUUfezth0sSGRMyN9NvnKf3B9E3VXZpd3GVb7q1qxcYN2bV4t1f0M0eXrYsMWM9zgSW1N3n0pR4R6vJp4rQ6d8uR9')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-80"></div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-title-lg text-title-lg text-primary line-clamp-1">Smoked Lamb Shoulder</h4>
+<span class="font-title-lg text-title-lg text-primary-fixed">$48</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4 flex-1">12-hour smoked shoulder, romesco, charred lemon, and herbs.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+<label class="flex items-center gap-2 cursor-pointer avail-toggle">
+<div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
+<div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+</label>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Cocktails -->
+<section data-menu-section="cocktails">
+<div class="flex items-center justify-between mb-6 border-b border-outline-variant/20 pb-4">
+<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Cocktails</h3>
+<span class="bg-surface-container-high px-3 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant">16 Items</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-outline-variant/30 transition-all flex flex-col" data-name="Smoked Maple Old Fashioned" data-category="cocktails">
+<div class="h-40 bg-surface-container-high relative w-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQ4FJfB1JlR9HUY4VnY0eIVzZlbhWbnkPvHMRbJrNqsUcmn7TWyXAtqFKVa1nK5MWdyocLVHVh1gqPAzXhnbRHEYLEJVePYwuwGnL1YJqDq6FQz0l55VWFnyOjHF6nJYYC8yuqWJ4ScdQMHpLFWY7g4QZBxQxCqWCZRmnQvwbzIRqob5LI5LUVt8BkL5A3wQ1N7PQX7YwbeGN4wpT9Bv2nVZ2d0X0B4S1m9R8c3P4bRKb9O8h88X0yF6j1npxSw0jANmpHlWUg2hXe5YiAvcU3aHj1fWqWt5glFeYFKaRbg0pGk6T3d6bE4R1VbqR0IkGc9YvjPSfQ0euQpHlY3OI0jHTZ8o0e1aJm9HgbG4Z6xVwLkDT2vN6O7f5UwNcT2pA1Wm4Q2ypLz4SkJbD9sB4Z8gK6XzE4FhN3eI7w9oPFsH0y1W0d5u8c2qR5gT1iK0P4q9A2mS7vB3Cn0L6hJx3dG8yY5T1aF7wP2eS9nK4oVb5qM0L2uP7jR4dX8bY1vNc6oT3fH0xE9lI4qZ7wC2hP5sJ0yG8nV6cB3kL1zU9fA2mT4oD7hQ0')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-80"></div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-title-lg text-title-lg text-primary line-clamp-1">Smoked Maple Old Fashioned</h4>
+<span class="font-title-lg text-title-lg text-primary-fixed">$18</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4 flex-1">Woodford Reserve, smoked maple, Angostura, orange oils.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+<label class="flex items-center gap-2 cursor-pointer avail-toggle">
+<div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
+<div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+</label>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/10 group hover:border-outline-variant/30 transition-all flex flex-col" data-name="Negroni Sbagliato" data-category="cocktails">
+<div class="h-40 bg-surface-container-high relative w-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqqTKQCmMploP9x4aTnxw0bPBzM7kH2rIVNabMpKz5vJsZJmkPj0eXmWXrMROtSkouorv71sEaD9mB6pXsT7m4P0e9zQk1hTdCf2WQy8jAWQaN3WpQ0uNq1mP7s0Jb4nK1tY5oDg0UaB2eL3kGpF7sW0xF9pVb4mN1qQ2cA6rH8tY3sL0kG5mP1nX0vJc9wB2qR4sE7tY1uH6oL3dG9fK4qN0xS8mV2jB5hC7aT3wP6nL1rY0fD9sK4qG8xV3mZ5kB2tH7qW0vC4gL9sF3rY6nP1lK0dG5mH8qT2wB7sE4qN0jV9xZ5lC3mP6nK1sD8fG2qW4hY7jB3nL0kX9tV1mG5rP7sC2hF4nB6qD0wY8jL3kS9fG1nH5mV0tB7gR2sX4qC8jP6lN1kM0dF3hS7qG4wE2nB9tV5rY8kL1jX0mP6sF3gD7hB2nQ4wC9kT5jS1pL8nM0xF4gH6qG3sR7vB0kN2jQ9wP5tL4fD7hS8gE3nB1mZ6kV2jC0xF8qP4nS2gH7mD0')
+">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent opacity-80"></div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-title-lg text-title-lg text-primary line-clamp-1">Negroni Sbagliato</h4>
+<span class="font-title-lg text-title-lg text-primary-fixed">$16</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4 flex-1">Campari, sweet vermouth, sparkling wine, orange twist.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+<label class="flex items-center gap-2 cursor-pointer avail-toggle">
+<div class="relative w-10 h-5 bg-tertiary-container rounded-full transition-colors">
+<div class="absolute left-5 top-0.5 w-4 h-4 bg-on-tertiary-container rounded-full shadow-sm transition-transform"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface avail-label">Available</span>
+</label>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Style for Specials Management -->
+<section data-menu-section="seasonal">
+<div class="flex items-center justify-between mb-6 border-b border-outline-variant/20 pb-4">
+<h3 class="font-headline-lg md:font-headline-lg text-headline-lg md:text-headline-lg text-primary">Seasonal Management</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Add Seasonal Special Feature Box -->
+<div class="md:col-span-2 bg-gradient-to-br from-surface-container to-surface-container-high rounded-xl p-6 border border-outline-variant/10 relative overflow-hidden flex flex-col justify-between min-h-[300px]">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+<div class="relative z-10 max-w-md">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/20 text-primary-container mb-4">
+<span class="material-symbols-outlined text-[16px]">campaign</span>
+<span class="font-label-sm text-label-sm">Autumn Menu Active</span>
+</div>
+<h4 class="font-display-lg text-[32px] leading-tight text-primary mb-2">Curate the Season</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Promote high-margin seasonal items or temporary specials across digital menus and POS instantly.</p>
+<button class="bg-surface text-primary border border-outline-variant/30 hover:bg-surface-bright h-touch-target px-6 rounded-lg font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 transition-colors w-max">
+<span class="material-symbols-outlined">auto_awesome</span>
+                                    Generate Special
+                                </button>
+</div>
+</div>
+<!-- Active Specials List -->
+<div class="bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col h-full">
+<div class="p-4 border-b border-outline-variant/10 bg-surface-container-high/50">
+<h4 class="font-title-lg text-title-lg text-primary">Active Specials</h4>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-2 hide-scrollbar">
+<div class="p-3 bg-surface rounded-lg border border-outline-variant/5 flex items-center gap-4 hover:border-outline-variant/20 transition-colors cursor-pointer group" data-name="Smoked Maple Old Fashioned Special">
+<div class="w-12 h-12 bg-surface-container-highest rounded-md shrink-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTfeiUDeJMFmfe1zsh4nELak1WmbzLKgOaTd0Bw_UuJ2Qoc11JCTT2ubeVvFIzCh2lg5ITDoE4eAMW-Q97tRUmTGwaxYa-LFrzCoz3PU5IOCxKh_ykd-zAQcOIhv6qPWnb0eQL4z5eMjzyH3w_QqokAM76aZjuXtF61jxlcThMN4LvLqbw_bt3oD6jiF7YiyE1bJFCbEihfrS63h9kOmO3YOVCdNDVv6DdKB3MlBMOqtIbIslRe12W')"></div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-primary truncate">Smoked Maple Old Fashioned</p>
+<p class="font-body-md text-[12px] text-on-surface-variant">$18 • Ends Nov 30</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">more_vert</span>
+</div>
+<div class="p-3 bg-surface rounded-lg border border-outline-variant/5 flex items-center gap-4 hover:border-outline-variant/20 transition-colors cursor-pointer group" data-name="Roasted Delicata Squash Special">
+<div class="w-12 h-12 bg-surface-container-highest rounded-md shrink-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBfPWpvi1jNgoNkkwWuxqZN64QArGzdqcw0zyp9RZOSzlL_iTVr5wMu5OdvO8PAE1tCC3BtN7jYec5vr_zMeK9_YRMaRRzQLOG7A98O4T_JfcVF93_7Z4joiIcZfBwfZHdRDdDhO-_3h9_38jiMeil300LojiihRnxnOwfrhf_quf_ICaGSWRLGWSyNYuku6dFaEw9EPv3Y72rqGgKHTThFTQNe5bZCS_jHe9YAKh-ICezzATq12Oh6')"></div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-primary truncate">Roasted Delicata Squash</p>
+<p class="font-body-md text-[12px] text-on-surface-variant">$16 • Ends Nov 30</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="assets/js/app.js"></script>
+</body></html>

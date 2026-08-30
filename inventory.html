@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bar &amp; Inventory - Chambú Kitchen &amp; Bar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#201f1f",
+                      "on-surface-variant": "#ccc6ba",
+                      "on-secondary-fixed": "#410007",
+                      "on-secondary": "#660412",
+                      "secondary-fixed-dim": "#ffb3b0",
+                      "tertiary": "#ffffff",
+                      "inverse-on-surface": "#313030",
+                      "primary-fixed": "#ece2c9",
+                      "surface-container-lowest": "#0e0e0e",
+                      "tertiary-fixed-dim": "#a2d582",
+                      "surface-container-low": "#1c1b1b",
+                      "surface": "#131313",
+                      "on-tertiary-fixed-variant": "#26500d",
+                      "on-primary": "#35301f",
+                      "surface-bright": "#393939",
+                      "on-primary-fixed": "#201b0c",
+                      "on-error": "#690005",
+                      "on-tertiary-container": "#436f2a",
+                      "on-secondary-fixed-variant": "#861f25",
+                      "background": "#131313",
+                      "secondary-fixed": "#ffdad8",
+                      "surface-container-highest": "#353534",
+                      "on-primary-container": "#6b6450",
+                      "error-container": "#93000a",
+                      "primary": "#ffffff",
+                      "outline": "#959086",
+                      "on-primary-fixed-variant": "#4c4634",
+                      "on-error-container": "#ffdad6",
+                      "primary-container": "#ece2c9",
+                      "on-surface": "#e5e2e1",
+                      "on-tertiary": "#133800",
+                      "surface-tint": "#cfc6ae",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary": "#ffb3b0",
+                      "tertiary-container": "#bdf19c",
+                      "outline-variant": "#4a463e",
+                      "on-tertiary-fixed": "#082100",
+                      "secondary-container": "#8a2227",
+                      "inverse-primary": "#645e4b",
+                      "on-secondary-container": "#ff9e9b",
+                      "primary-fixed-dim": "#cfc6ae",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#131313",
+                      "on-background": "#e5e2e1",
+                      "surface-variant": "#353534",
+                      "tertiary-fixed": "#bdf19c",
+                      "surface-container-high": "#2a2a2a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "gutter": "24px",
+                      "base": "8px",
+                      "touch-target": "48px"
+              },
+              "fontFamily": {
+                      "body-md": ["Hanken Grotesk"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "headline-md": ["Libre Caslon Text"],
+                      "title-lg": ["Hanken Grotesk"],
+                      "display-lg": ["Libre Caslon Text"],
+                      "label-md": ["Hanken Grotesk"],
+                      "headline-lg": ["Libre Caslon Text"],
+                      "label-sm": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Libre Caslon Text"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                      "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                      "title-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                      "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                      "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                      "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                      "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                      "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "400" }]
+              }
+      },
+          },
+        }
+      </script>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen overflow-hidden flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-touch-target bg-surface-container-low border-b border-outline-variant/10">
+<div class="font-headline-md text-headline-md text-primary tracking-tight truncate">Chambú Kitchen &amp; Bar</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" >notifications</span>
+<span class="material-symbols-outlined text-primary" >person</span>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant/10 py-base gap-2 shrink-0">
+<div class="px-4 py-4 flex items-center gap-3 mb-4">
+<img alt="Chambú Logo" class="w-10 h-10 rounded-full object-cover border border-outline-variant/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIu8cYl-GK_4Fil130lWM4okp63Dqdo2fnIT-tz4NhwWpt8ddNkCOqReHXJkCTbqr-3rSEa6Bgzqe1rUly4eukL42y-Wdpnd5LI70t__92ZFlJVLzOELCiSgPiSGPVPZrDOMkpQma_jo1xcKWjQxxiwSHry1duxt7ysY2806f-MQwFXisOdvEGxVRWVHNuWwdKkjF8SxxQaVddcIpNQYadGksnxrHKg12cvYYIexuIwbjndnDoD-nc7_qab0BGmCh90w"/>
+<div>
+<div class="font-headline-md text-headline-md text-primary leading-tight">Chambú</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Kitchen &amp; Bar</div>
+</div>
+</div>
+<div class="flex-1 px-2 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="index.html" href="index.html">
+<span class="material-symbols-outlined" >grid_view</span> Floor Map
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="pos.html" href="pos.html">
+<span class="material-symbols-outlined" >receipt_long</span> POS &amp; Billing
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="menu.html" href="menu.html">
+<span class="material-symbols-outlined" >restaurant_menu</span> Menu Editor
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="inventory.html" href="inventory.html">
+<span class="material-symbols-outlined" >liquor</span> Bar &amp; Inventory
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" >oven_gen</span> Kitchen Display
+            </a>
+</div>
+<div class="px-2 mt-auto space-y-1 pt-4 border-t border-outline-variant/10">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" >settings</span> Settings
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" >help_outline</span> Support
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full bg-surface relative overflow-hidden">
+<!-- Header / Toolbar -->
+<div class="px-margin-mobile md:px-margin-desktop py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant/10 bg-surface z-10">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-1">Bar Inventory</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage stock, track usage, and trigger quick restocks.</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-3">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 text-on-surface rounded-full py-2 pl-10 pr-4 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all font-body-md text-sm placeholder:text-on-surface-variant/50" id="invSearch" placeholder="Search inventory..." type="text"/>
+</div>
+<button class="w-full sm:w-auto h-touch-target px-6 bg-primary-container text-on-primary-container font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-colors active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm" >add</span> Add Item
+                </button>
+</div>
+</div>
+<!-- Filters -->
+<div class="px-margin-mobile md:px-margin-desktop py-4 flex gap-2 overflow-x-auto hide-scrollbar border-b border-outline-variant/5 bg-surface-container-lowest z-10">
+<button class="filter-btn active px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-inv-filter="all">All Stock</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-inv-filter="spirits">Spirits</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-inv-filter="wines">Wines</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-inv-filter="ingredients">Cocktail Ingredients</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-error/50 text-error hover:bg-error/10 font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1" data-inv-filter="low">
+<span class="material-symbols-outlined text-[14px]">warning</span> Low Stock
+            </button>
+</div>
+<!-- Inventory Grid -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop scroll-smooth">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Item Card 1: Normal -->
+<div class="glass-panel rounded-xl p-4 flex flex-col gap-4 hover:border-primary-container/50 transition-colors group" data-category="spirits" data-stock="12" data-search-text="hendrick's gin spirit gin 750ml">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" >liquor</span>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Spirit • Gin</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary truncate mb-1">Hendrick's Gin</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">750ml</p>
+</div>
+<div class="flex justify-between items-end mt-auto pt-4 border-t border-outline-variant/10">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1" data-stock-state>IN STOCK</div>
+<div class="font-headline-md text-headline-md text-primary-container leading-none stock-count">12 <span class="font-body-md text-body-md text-on-surface-variant">btls</span></div>
+</div>
+<div class="text-right">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">PAR</div>
+<div class="font-body-lg text-body-lg text-on-surface">15</div>
+</div>
+</div>
+</div>
+<!-- Item Card 2: Low Stock Alert -->
+<div class="glass-panel rounded-xl p-4 flex flex-col gap-4 border border-error/30 relative overflow-hidden group" data-category="wines" data-stock="2" data-search-text="veuve clicquot brut wine 750ml">
+<div class="absolute inset-0 bg-error/5 pointer-events-none"></div>
+<div class="flex justify-between items-start relative z-10">
+<div class="w-12 h-12 rounded-lg bg-error/10 border border-error/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" >wine_bar</span>
+</div>
+<span class="px-2 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm animate-pulse" data-stock-state>LOW STOCK</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-title-lg text-title-lg text-primary truncate mb-1">Veuve Clicquot Brut</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">750ml</p>
+</div>
+<div class="flex justify-between items-end mt-auto pt-4 border-t border-error/20 relative z-10">
+<div>
+<div class="font-label-sm text-label-sm text-error mb-1" data-stock-state>IN STOCK</div>
+<div class="font-headline-md text-headline-md text-error leading-none stock-count">2 <span class="font-body-md text-body-md text-error/70">btls</span></div>
+</div>
+<button class="restock-btn h-8 px-3 bg-error text-on-error font-label-sm text-label-sm rounded flex items-center justify-center hover:bg-error/90 transition-colors">
+                            Quick Restock
+                        </button>
+</div>
+</div>
+<!-- Item Card 3: Normal -->
+<div class="glass-panel rounded-xl p-4 flex flex-col gap-4 hover:border-primary-container/50 transition-colors group" data-category="spirits" data-stock="5" data-search-text="macallan 12 yr spirit whiskey 750ml">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" >liquor</span>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Spirit • Whiskey</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary truncate mb-1">Macallan 12 Yr</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">750ml</p>
+</div>
+<div class="flex justify-between items-end mt-auto pt-4 border-t border-outline-variant/10">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1" data-stock-state>IN STOCK</div>
+<div class="font-headline-md text-headline-md text-primary-container leading-none stock-count">5 <span class="font-body-md text-body-md text-on-surface-variant">btls</span></div>
+</div>
+<div class="text-right">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">PAR</div>
+<div class="font-body-lg text-body-lg text-on-surface">6</div>
+</div>
+</div>
+</div>
+<!-- Item Card 4: Normal -->
+<div class="glass-panel rounded-xl p-4 flex flex-col gap-4 hover:border-primary-container/50 transition-colors group" data-category="ingredients" data-stock="8" data-search-text="campari ingredient 1l">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" >local_bar</span>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Ingredient</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary truncate mb-1">Campari</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">1L</p>
+</div>
+<div class="flex justify-between items-end mt-auto pt-4 border-t border-outline-variant/10">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1" data-stock-state>IN STOCK</div>
+<div class="font-headline-md text-headline-md text-primary-container leading-none stock-count">8 <span class="font-body-md text-body-md text-on-surface-variant">btls</span></div>
+</div>
+<div class="text-right">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">PAR</div>
+<div class="font-body-lg text-body-lg text-on-surface">10</div>
+</div>
+</div>
+</div>
+<!-- Item Card 5: Normal -->
+<div class="glass-panel rounded-xl p-4 flex flex-col gap-4 hover:border-primary-container/50 transition-colors group" data-category="spirits" data-stock="10" data-search-text="casamigos blanco tequila spirit 750ml">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" >liquor</span>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Spirit • Tequila</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary truncate mb-1">Casamigos Blanco</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">750ml</p>
+</div>
+<div class="flex justify-between items-end mt-auto pt-4 border-t border-outline-variant/10">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1" data-stock-state>IN STOCK</div>
+<div class="font-headline-md text-headline-md text-primary-container leading-none stock-count">10 <span class="font-body-md text-body-md text-on-surface-variant">btls</span></div>
+</div>
+<div class="text-right">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">PAR</div>
+<div class="font-body-lg text-body-lg text-on-surface">12</div>
+</div>
+</div>
+</div>
+<!-- Item Card 6: Low Stock -->
+<div class="glass-panel rounded-xl p-4 flex flex-col gap-4 border border-error/30 relative overflow-hidden group" data-category="ingredients" data-stock="3" data-search-text="blood orange juice ingredient 1l">
+<div class="absolute inset-0 bg-error/5 pointer-events-none"></div>
+<div class="flex justify-between items-start relative z-10">
+<div class="w-12 h-12 rounded-lg bg-error/10 border border-error/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" >nutrition</span>
+</div>
+<span class="px-2 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm animate-pulse" data-stock-state>LOW STOCK</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-title-lg text-title-lg text-primary truncate mb-1">Blood Orange Juice</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">1L</p>
+</div>
+<div class="flex justify-between items-end mt-auto pt-4 border-t border-error/20 relative z-10">
+<div>
+<div class="font-label-sm text-label-sm text-error mb-1" data-stock-state>IN STOCK</div>
+<div class="font-headline-md text-headline-md text-error leading-none stock-count">3 <span class="font-body-md text-body-md text-error/70">ctns</span></div>
+</div>
+<button class="restock-btn h-8 px-3 bg-error text-on-error font-label-sm text-label-sm rounded flex items-center justify-center hover:bg-error/90 transition-colors">
+                            Quick Restock
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script src="assets/js/app.js"></script>
+</body></html>

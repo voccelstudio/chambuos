@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chambú Kitchen &amp; Bar - Billing &amp; Payments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#201f1f",
+                        "on-surface-variant": "#ccc6ba",
+                        "on-secondary-fixed": "#410007",
+                        "on-secondary": "#660412",
+                        "secondary-fixed-dim": "#ffb3b0",
+                        "tertiary": "#ffffff",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed": "#ece2c9",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#a2d582",
+                        "surface-container-low": "#1c1b1b",
+                        "surface": "#131313",
+                        "on-tertiary-fixed-variant": "#26500d",
+                        "on-primary": "#35301f",
+                        "surface-bright": "#393939",
+                        "on-primary-fixed": "#201b0c",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#436f2a",
+                        "on-secondary-fixed-variant": "#861f25",
+                        "background": "#131313",
+                        "secondary-fixed": "#ffdad8",
+                        "surface-container-highest": "#353534",
+                        "on-primary-container": "#6b6450",
+                        "error-container": "#93000a",
+                        "primary": "#ffffff",
+                        "outline": "#959086",
+                        "on-primary-fixed-variant": "#4c4634",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#ece2c9",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary": "#133800",
+                        "surface-tint": "#cfc6ae",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary": "#ffb3b0",
+                        "tertiary-container": "#bdf19c",
+                        "outline-variant": "#4a463e",
+                        "on-tertiary-fixed": "#082100",
+                        "secondary-container": "#8a2227",
+                        "inverse-primary": "#645e4b",
+                        "on-secondary-container": "#ff9e9b",
+                        "primary-fixed-dim": "#cfc6ae",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#131313",
+                        "on-background": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "tertiary-fixed": "#bdf19c",
+                        "surface-container-high": "#2a2a2a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "touch-target": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "title-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Libre Caslon Text"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Libre Caslon Text"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background h-full overflow-hidden flex font-body-md">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-base gap-2 bg-surface-container dark:bg-surface-container border-r border-outline-variant/10 left-0 h-full w-64 z-10 shrink-0">
+<div class="px-4 py-4 mb-4 flex items-center gap-3">
+<img alt="Chambú Logo" class="w-10 h-10 rounded-full object-cover border border-outline-variant/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX2xtXsrgwg8jy6GZbDi6Enhn48vdmbZO3KoHUGz_483fvSn4kCsiAaD_hJiMjD9lWfr4h7jmawnyXiZy_ZD2tWOnEW57YuBINYx0SRxy9VEKMoeEPyTuOpHPJunsUGWLR6Zjd41gbWPWoz_l8INGNReDR9qfc5QyRnJ-sMnzbeEoHxxH2t1LEhKyh-VRvd0ydnIlLjYd4rsojUjxMhY-YIc30A5FOZzBV0YjftXu-pPik5o876hmo5gWRWk02UVLsJQ"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Chambú</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">Kitchen &amp; Bar</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-1 px-2 overflow-y-auto">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all active:translate-x-1 duration-200 rounded-lg" data-nav="index.html" href="index.html">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md text-label-md">Floor Map</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg border-l-4 border-transparent" data-nav="pos.html" href="pos.html">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">POS &amp; Billing</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all active:translate-x-1 duration-200 rounded-lg" data-nav="menu.html" href="menu.html">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu Editor</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all active:translate-x-1 duration-200 rounded-lg" data-nav="inventory.html" href="inventory.html">
+<span class="material-symbols-outlined">liquor</span>
+<span class="font-label-md text-label-md">Bar &amp; Inventory</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all active:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">oven_gen</span>
+<span class="font-label-md text-label-md">Kitchen Display</span>
+</a>
+</div>
+<div class="mt-auto px-2 pt-4 border-t border-outline-variant/10">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all active:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all active:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background relative">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-touch-target bg-surface dark:bg-surface border-b border-outline-variant/10 shrink-0">
+<div class="flex items-center gap-2">
+<img alt="Chambú Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnUL8yMb0zJAjHiO2WTsE4FA_cbVH_mbP67i9Gc7Uyjd_xS67v4hbymM9urIXNe2diMaIg8hIAgiEmswl4ANh4FxA7Az70Bw8BN5mnPkKBk975lRpKcbfaIWcIAhod-Qmy4uo3nc7dBw3HXT2NVMAjhnwu_7x-k9cXHsE7huhhbX4OW2WYKCQ-Netd9Kdib5QQs8SBbGK_dnd_FPPPOoJcPTC3-ojM5XlJO4fZF6aQtkk3dI-UtEgMFlfRNPIi8KHX5A"/>
+<span class="font-headline-md text-headline-md text-primary dark:text-primary tracking-tight">Chambú</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<!-- POS Canvas -->
+<div class="flex-1 flex flex-col lg:flex-row h-full overflow-hidden">
+<!-- Left Panel: Ticket Details (Order Summary) -->
+<section class="w-full lg:w-[400px] xl:w-[480px] flex flex-col h-full bg-surface-container-low border-r border-outline-variant/10 shrink-0 z-0">
+<!-- Header -->
+<div class="px-6 py-5 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container">
+<div>
+<h2 class="font-title-lg text-title-lg text-primary" id="ticketTitle">Table 42</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Ticket #8902 • Server: Alex M.</p>
+</div>
+<div class="bg-tertiary-container/10 text-tertiary-container px-3 py-1 rounded-full border border-tertiary-container/30" id="ticketStatus">
+<span class="font-label-md text-label-md">Open</span>
+</div>
+</div>
+<!-- Quick Add -->
+<div class="px-4 py-3 border-b border-outline-variant/10 flex gap-2">
+<div class="flex-1">
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="newItemName" placeholder="Quick add item..." type="text"/>
+</div>
+<div class="w-24">
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="newItemPrice" placeholder="0.00" type="number" min="0" step="0.01"/>
+</div>
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed px-4 rounded-lg font-label-md text-label-md uppercase tracking-wider transition-colors font-bold shrink-0" id="btnAddItem">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Item List -->
+<div class="flex-1 overflow-y-auto px-4 py-4 space-y-2" id="ticketItems">
+<!-- Item 1 -->
+<div class="bg-surface p-4 rounded-lg border border-outline-variant/20 hover:border-outline-variant/50 transition-colors group" data-price="85">
+<div class="flex justify-between items-start">
+<div class="flex-1">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Wagyu Ribeye 12oz</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Medium Rare • No Butter</p>
+</div>
+<div class="text-right ml-4">
+<span class="font-body-lg text-body-lg text-primary">$85.00</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface p-4 rounded-lg border border-outline-variant/20 hover:border-outline-variant/50 transition-colors group" data-price="14">
+<div class="flex justify-between items-start">
+<div class="flex-1">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Truffle Fries</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Parmesan, Aioli on side</p>
+</div>
+<div class="text-right ml-4">
+<span class="font-body-lg text-body-lg text-primary">$14.00</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface p-4 rounded-lg border border-outline-variant/20 hover:border-outline-variant/50 transition-colors group" data-price="36">
+<div class="flex justify-between items-start">
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">2x Old Fashioned</h3>
+<span class="bg-secondary-container/20 text-secondary-container text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Bar</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Woodford Reserve</p>
+</div>
+<div class="text-right ml-4">
+<span class="font-body-lg text-body-lg text-primary">$36.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Totals & Actions -->
+<div class="bg-surface-container p-6 border-t border-outline-variant/10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-body-md text-body-md">Subtotal</span>
+<span class="font-body-md text-body-md" id="ticketSubtotal">$135.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-body-md text-body-md">Tax (8.5%)</span>
+<span class="font-body-md text-body-md" id="ticketTax">$11.48</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-body-md text-body-md">Service Charge (18%)</span>
+<span class="font-body-md text-body-md" id="ticketService">$24.30</span>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex justify-between items-end">
+<span class="font-title-lg text-title-lg text-primary">Total</span>
+<span class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight" id="ticketTotal">$170.78</span>
+</div>
+<p class="font-label-sm text-label-sm text-tertiary-fixed-dim hidden mt-2" id="splitNote"></p>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-transparent border border-outline-variant hover:border-primary-container text-on-surface font-label-md text-label-md py-4 rounded-lg uppercase tracking-wider transition-colors flex items-center justify-center gap-2 h-touch-target" id="btnSplit">
+<span class="material-symbols-outlined text-[18px]">call_split</span>
+                            Split Bill
+                        </button>
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-4 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg h-touch-target flex items-center justify-center gap-2" id="btnPayNow">
+<span class="material-symbols-outlined text-[18px]">credit_card</span>
+                            Pay Now
+                        </button>
+</div>
+</div>
+</section>
+<!-- Right Panel: open space -->
+<section class="flex-1 bg-background hidden lg:flex flex-col items-center justify-center relative overflow-y-auto">
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+<div class="text-center">
+<span class="material-symbols-outlined text-6xl text-on-surface-variant/40 inline-block">payment</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface-variant mt-4">Select or open a ticket</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-md">Use the floor map or quick-add to start an order, then tap "Pay Now" to process the payment.</p>
+</div>
+</section>
+</div>
+<!-- Payment Modal -->
+<div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="payModal">
+<!-- Stage: Payment method -->
+<div class="w-full max-w-2xl bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 shadow-2xl relative z-10 max-h-[90vh] overflow-y-auto" data-pay-stage>
+<div class="text-center mb-8">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">contactless</span>
+<h2 class="font-headline-md text-headline-md text-primary">Awaiting Payment</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Tap, insert, or swipe card on terminal</p>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-8">
+<button class="bg-surface border-2 border-primary-container/50 hover:border-primary-container text-on-surface p-4 rounded-lg flex flex-col items-center justify-center gap-3 transition-all h-24 relative overflow-hidden group" data-pay-method="card">
+<div class="absolute inset-0 bg-primary-container/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<span class="material-symbols-outlined text-primary-container relative z-10">credit_card</span>
+<span class="font-label-md text-label-md relative z-10">Card</span>
+</button>
+<button class="bg-surface border border-outline-variant/20 hover:border-outline-variant text-on-surface-variant hover:text-on-surface p-4 rounded-lg flex flex-col items-center justify-center gap-3 transition-all h-24" data-pay-method="cash">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Cash</span>
+</button>
+<button class="bg-surface border border-outline-variant/20 hover:border-outline-variant text-on-surface-variant hover:text-on-surface p-4 rounded-lg flex flex-col items-center justify-center gap-3 transition-all h-24" data-pay-method="gift">
+<span class="material-symbols-outlined">redeem</span>
+<span class="font-label-md text-label-md">Gift Card</span>
+</button>
+</div>
+<div class="bg-surface p-6 rounded-lg border border-outline-variant/10">
+<div class="flex justify-between items-center mb-4">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Amount Due</span>
+<span class="font-title-lg text-title-lg text-primary" id="payAmount">$170.78</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mb-6 overflow-hidden">
+<div class="bg-primary-container h-1.5 rounded-full w-0 transition-all duration-100" id="payProgressBar"></div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-transparent border border-error/50 hover:border-error hover:bg-error/10 text-error font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors h-touch-target" id="btnCancelPay">
+                                Cancel
+                            </button>
+<button class="flex-1 bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors font-bold h-touch-target" id="btnProcessPay">
+                                Process Payment
+                            </button>
+</div>
+</div>
+</div>
+<!-- Stage: Success -->
+<div class="hidden w-full max-w-2xl bg-surface-container-low border border-outline-variant/10 rounded-xl p-8 shadow-2xl relative z-10" data-pay-stage>
+<div class="text-center">
+<span class="material-symbols-outlined text-6xl text-tertiary-fixed-dim inline-block">check_circle</span>
+<h2 class="font-headline-md text-headline-md text-primary mt-4">Payment Complete</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Tender: Card</p>
+<div class="mt-6 bg-surface p-6 rounded-lg border border-outline-variant/10">
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Total Paid</span>
+<span class="font-title-lg text-title-lg text-primary" id="payAmountSuccess">$170.78</span>
+</div>
+</div>
+<div class="flex gap-4 mt-8">
+<button class="flex-1 bg-transparent border border-outline-variant hover:border-outline text-on-surface font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors h-touch-target" id="btnCancelProcess">
+                                    Back
+                                </button>
+<button class="flex-1 bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors font-bold h-touch-target" id="btnNewOrder">
+                                    New Order
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script src="assets/js/app.js"></script>
+</body></html>
