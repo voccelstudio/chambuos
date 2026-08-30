@@ -11,6 +11,7 @@
     { page: 'menu.html', icon: 'restaurant_menu', label: 'Menu Editor' },
     { page: 'inventory.html', icon: 'liquor', label: 'Bar & Inventory' },
     { page: 'kitchen.html', icon: 'oven_gen', label: 'Kitchen Display' },
+    { page: 'analytics.html', icon: 'monitoring', label: 'Analytics' },
     { page: 'settings.html', icon: 'settings', label: 'Settings' },
     { page: 'support.html', icon: 'help_outline', label: 'Support' }
   ];
@@ -20,7 +21,11 @@
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
   function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
 
-  function money(n) { return '$' + n.toFixed(2); }
+  function money(n) {
+    try {
+      return 'Gs. ' + n.toLocaleString('es-PY', { maximumFractionDigits: 2 });
+    } catch (e) { return 'Gs. ' + n.toFixed(2); }
+  }
 
   function showToast(msg, ok) {
     var wrap = $('#toastWrap');
@@ -157,6 +162,8 @@
     }
 
     function render() {
+      var cnt = $('#resCount');
+      if (cnt) cnt.textContent = String(load().length);
       var q = (search && search.value ? search.value.toLowerCase() : '');
       var hits = load().filter(function (x) {
         if (!q) return true;
@@ -190,6 +197,17 @@
     }
 
     load().forEach(function (r) { markTableReserved(r.table); });
+
+    /* Show party size on floor-plan tables */
+    var partyMap = storeGet('chambu_tables_party', {});
+    $$('[data-table-open]').forEach(function (el) {
+      var t = el.getAttribute('data-table-open');
+      if (!partyMap[t]) return;
+      var span = $('span.font-label-sm.mt-1', el);
+      if (span && /Seated/.test(span.textContent)) {
+        span.textContent = partyMap[t] + '/4 Seated';
+      }
+    });
 
     document.addEventListener('click', function (e) {
       var seatBtn = e.target.closest('[data-seat-res]');
@@ -230,6 +248,8 @@
 
     $('#resModal').addEventListener('click', function (e) { if (e.target === this) modalHide('#resModal'); });
     $('#walkInModal').addEventListener('click', function (e) { if (e.target === this) modalHide('#walkInModal'); });
+
+    render();
   }
   if ($('#btnFindRes')) reservationsApp();
 
@@ -596,17 +616,11 @@
   if ($('#btnAddItem') && $('#invGrid')) inventoryItemsApp();
 
   function getSettings() {
-    var d = { restaurant: 'Chambú Kitchen & Bar', tax: 8.5, service: 18 };
+    var d = { restaurant: 'Chambú Kitchen & Bar' };
     try {
       var s = JSON.parse(localStorage.getItem('chambu_settings') || 'null');
-      if (s && typeof s === 'object') {
-        if (s.restaurant) d.restaurant = String(s.restaurant);
-        if (!isNaN(parseFloat(s.tax))) d.tax = parseFloat(s.tax);
-        if (!isNaN(parseFloat(s.service))) d.service = parseFloat(s.service);
-      }
+      if (s && typeof s === 'object' && s.restaurant) d.restaurant = String(s.restaurant);
     } catch (e) {}
-    d.tax = Math.max(0, d.tax);
-    d.service = Math.max(0, d.service);
     return d;
   }
 
@@ -621,8 +635,6 @@
     var params = new URLSearchParams(location.search);
     var table = params.get('table');
     var settings = getSettings();
-    var taxRate = settings.tax / 100;
-    var serviceRate = settings.service / 100;
 
     function recalc() {
       var items = $$('[data-price]');
@@ -630,23 +642,56 @@
       items.forEach(function (it) {
         subtotal += parseFloat(it.getAttribute('data-price') || '0');
       });
-      var tax = subtotal * taxRate;
-      var service = subtotal * serviceRate;
-      var total = subtotal + tax + service;
       var t = $('#ticketSubtotal'); if (t) t.textContent = money(subtotal);
-      var tx = $('#ticketTax'); if (tx) tx.textContent = money(tax);
-      var sv = $('#ticketService'); if (sv) sv.textContent = money(service);
-      var tl = $('#ticketTotal'); if (tl) tl.textContent = money(total);
-      var tmpay = $('#payAmount'); if (tmpay) tmpay.textContent = money(total);
-      var tmpay2 = $('#payAmountSuccess'); if (tmpay2) tmpay2.textContent = money(total);
-      var taxLab = $('#taxLabel'); if (taxLab) taxLab.textContent = 'Tax (' + settings.tax.toFixed(1) + '%)';
-      var svcLab = $('#serviceLabel'); if (svcLab) svcLab.textContent = 'Service Charge (' + settings.service.toFixed(1) + '%)';
+      var tl = $('#ticketTotal'); if (tl) tl.textContent = money(subtotal);
+      var tmpay = $('#payAmount'); if (tmpay) tmpay.textContent = money(subtotal);
+      var tmpay2 = $('#payAmountSuccess'); if (tmpay2) tmpay2.textContent = money(subtotal);
     }
 
     var totalEl = $('#ticketTitle');
     if (table && totalEl) {
       totalEl.textContent = 'Table ' + table;
       document.title = 'Table ' + table + ' - Chambú Kitchen & Bar';
+    }
+
+    /* Visit + party tracking (analytics: avg people/table, dwell time) */
+    var party = 2;
+    var visits = storeGet('chambu_visits', []);
+    var curVisit = storeGet('chambu_current_visit', null);
+    if (table) {
+      if (!curVisit || curVisit.table !== table) {
+        curVisit = { table: table, party: party, seated: Date.now() };
+        storeSet('chambu_current_visit', curVisit);
+      }
+      if (curVisit.party) party = curVisit.party;
+    }
+    var partyEl = $('#partyCount');
+
+    function saveParty(n) {
+      party = n;
+      if (partyEl) partyEl.textContent = String(party);
+      curVisit = curVisit || { table: table, party: party, seated: Date.now() };
+      curVisit.party = party;
+      storeSet('chambu_current_visit', curVisit);
+      if (table) {
+        var map = storeGet('chambu_tables_party', {});
+        map[table] = n;
+        storeSet('chambu_tables_party', map);
+      }
+    }
+
+    var btnMinus = $('#btnPartyMinus');
+    var btnPlus = $('#btnPartyPlus');
+    if (btnMinus) btnMinus.addEventListener('click', function () { saveParty(Math.max(1, party - 1)); });
+    if (btnPlus) btnPlus.addEventListener('click', function () { saveParty(Math.min(20, party + 1)); });
+
+    function closeVisit() {
+      if (!curVisit) return;
+      var done = { table: curVisit.table, party: curVisit.party || party, seated: curVisit.seated, closed: Date.now() };
+      if (done.closed > done.seated) visits.push(done);
+      storeSet('chambu_visits', visits);
+      storeSet('chambu_current_visit', null);
+      curVisit = null;
     }
 
     /* Ensure every ticket line has a remove control */
@@ -782,6 +827,7 @@
           stagePay.classList.add('hidden');
           stageOk.classList.remove('hidden');
           $('#btnCancelPay').disabled = false;
+          closeVisit();
         }
         progress.style.width = width + '%';
       }, 130);
@@ -914,12 +960,183 @@
       orders.forEach(function (o) { if (String(o.id) === b.getAttribute('data-advance')) order = o; });
       if (!order) return;
       order.status = order.status === 'new' ? 'in' : order.status === 'in' ? 'ready' : 'done';
+      if (order.status === 'done' && !order.doneAt) order.doneAt = Date.now();
       save(orders);
       render();
       if (order.status === 'done') showToast('Order #' + order.id + ' complete', true);
     });
   }
   if ($('#colNew')) kdsApp();
+
+  /* =========================================================
+   * Analytics (analytics.html) — charts + month comparison
+   * ========================================================= */
+  function avg(arr) { return arr && arr.length ? arr.reduce(function (a, b) { return a + b; }, 0) / arr.length : 0; }
+
+  function fmtMins(m) {
+    m = Math.round(m);
+    if (m >= 60) return Math.floor(m / 60) + 'h ' + (m % 60) + 'm';
+    return m + 'm';
+  }
+
+  function moOf(ts) {
+    var d = new Date(ts);
+    return d.getFullYear() + '-' + ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1);
+  }
+
+  function moLabel(m) {
+    var p = m.split('-');
+    var names = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    return (names[parseInt(p[1], 10) - 1] || p[1]) + ' ' + p[0];
+  }
+
+  function barChart(el, rows) {
+    if (!el) return;
+    if (!rows || !rows.length) {
+      el.innerHTML = '<p class="font-body-md text-body-md text-on-surface-variant py-4 text-center">Sin datos para este rango.</p>';
+      return;
+    }
+    var palette = ['bg-primary-container', 'bg-secondary-container', 'bg-tertiary-container', 'bg-surface-container-highest'];
+    var max = rows.reduce(function (m, r) { return Math.max(m, r.value); }, 0) || 1;
+    el.innerHTML = rows.map(function (r, i) {
+      var pct = Math.max(3, Math.round((r.value / max) * 100));
+      var color = palette[i % palette.length];
+      return '<div class="flex items-center gap-3 mb-2">' +
+        '<div class="w-28 shrink-0 text-right font-label-md text-label-md text-on-surface-variant truncate" title="' + r.label + '">' + r.label + '</div>' +
+        '<div class="flex-1 bg-surface-container-high rounded-full h-6 overflow-hidden">' +
+          '<div class="h-full ' + color + ' rounded-full flex items-center justify-end pr-2" style="width:' + pct + '%">' +
+            '<span class="font-label-sm text-label-sm text-on-primary-container">' + (r.display !== undefined ? r.display : r.value) + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function analyticsApp() {
+    if (!$('#analyticsRoot')) return;
+    var DAY = 86400000;
+    var now = Date.now();
+
+    function seed() {
+      var visits = storeGet('chambu_visits', null);
+      if (visits === null) {
+        visits = [];
+        ['T1', 'T2', 'T3', 'B1', 'B2', 'B3'].forEach(function (tbl, ti) {
+          for (var i = 0; i < 12; i++) {
+            var d = now - (ti * 3 + i * 5) * DAY - Math.floor(Math.random() * DAY);
+            var dur = (45 + Math.floor(Math.random() * 135)) * 60000;
+            visits.push({ table: tbl, party: 1 + Math.floor(Math.random() * 5), seated: d, closed: d + dur });
+          }
+        });
+        storeSet('chambu_visits', visits);
+      }
+      var orders = storeGet('chambu_analytics_orders', null);
+      if (orders === null) {
+        var names = ['Mojito', 'Old Fashioned', 'Caipiroska', 'Margarita', 'Pisco Sour', 'Fernet &amp; Coke', 'Vuelve a la Vida', 'Cerveza Hatuey', 'Vino Tinto Casa', 'Tereré', 'Whiskey Macallan', 'Limonada'];
+        var clean = function (s) { return s.replace('&amp;', '&'); };
+        orders = [];
+        for (var j = 0; j < 45; j++) {
+          var dd = now - Math.floor(Math.random() * 90) * DAY - Math.floor(Math.random() * DAY);
+          var prep = (8 + Math.floor(Math.random() * 20)) * 60000;
+          orders.push({
+            id: 'A' + j,
+            table: 'T' + (1 + (j % 3)),
+            sent: dd,
+            doneAt: dd + prep,
+            status: 'done',
+            items: [{ name: clean(names[j % names.length]), qty: 1 + (j % 3), note: '' }]
+          });
+        }
+        storeSet('chambu_analytics_orders', orders);
+      }
+    }
+
+    seed();
+
+    var visitsAll = storeGet('chambu_visits', []);
+    var ordersSeed = storeGet('chambu_analytics_orders', []);
+    var liveOrders = storeGet('chambu_orders', []).filter(function (o) { return o.doneAt; });
+    var months = {};
+    visitsAll.forEach(function (v) { months[moOf(v.closed || v.seated)] = 1; });
+    ordersSeed.concat(liveOrders).forEach(function (o) { if (o.doneAt) months[moOf(o.doneAt)] = 1; });
+
+    var sel = $('#moSelector');
+    var sorted = Object.keys(months).sort();
+    sel.innerHTML = '<option value="all">Todos los meses (' + sorted.length + ')</option>' +
+      sorted.map(function (m) { return '<option value="' + m + '">' + moLabel(m) + '</option>'; }).join('');
+
+    function render() {
+      var month = sel.value;
+
+      function inMonth(ts) { return month === 'all' || moOf(ts) === month; }
+
+      var visits = visitsAll.filter(function (v) { return inMonth(v.closed || v.seated); });
+      var orders = ordersSeed.concat(liveOrders).filter(function (o) { return inMonth(o.doneAt || o.sent); });
+
+      /* Top drinks */
+      var sold = {};
+      orders.forEach(function (o) {
+        (o.items || []).forEach(function (it) { sold[it.name] = (sold[it.name] || 0) + (it.qty || 1); });
+      });
+      var top = Object.keys(sold).map(function (k) { return { label: k, value: sold[k], display: String(sold[k]) }; })
+        .sort(function (a, b) { return b.value - a.value; }).slice(0, 8);
+      barChart($('#chartTopDrinks'), top);
+      var totalSold = Object.keys(sold).reduce(function (a, k) { return a + sold[k]; }, 0);
+      $('#drinksAvgBig').textContent = totalSold ? String(totalSold) : '—';
+      $('#drinksAvgNote').textContent = orders.length ? totalSold + ' vendidos en ' + orders.length + ' comandas' : 'Sin ventas registradas';
+
+      /* Avg party per table */
+      var byParty = {};
+      visits.forEach(function (v) { (byParty[v.table] = byParty[v.table] || []).push(v.party || 1); });
+      var partyRows = Object.keys(byParty).sort().map(function (k) { return { label: k, value: avg(byParty[k]), display: avg(byParty[k]).toFixed(1) + ' pers.' }; });
+      barChart($('#chartAvgParty'), partyRows);
+      var overallParty = visits.length ? avg(visits.map(function (v) { return v.party || 1; })) : 0;
+      $('#partyAvgBig').textContent = overallParty ? overallParty.toFixed(1) : '—';
+      $('#partyAvgNote').textContent = visits.length ? 'Promedio en ' + visits.length + ' visitas' : 'Sin visitas registradas';
+
+      /* Avg prep time */
+      var prepTimes = orders.filter(function (o) { return o.doneAt && o.sent; }).map(function (o) { return (o.doneAt - o.sent) / 60000; });
+      var prepAvg = avg(prepTimes);
+      $('#prepAvgBig').textContent = prepTimes.length ? fmtMins(prepAvg) : '—';
+      $('#prepAvgNote').textContent = prepTimes.length ? prepTimes.length + ' órdenes completadas' : 'Sin comandas completadas';
+
+      /* Avg dwell per table */
+      var byDwell = {};
+      visits.forEach(function (v) { (byDwell[v.table] = byDwell[v.table] || []).push(((v.closed || v.seated) - v.seated) / 60000); });
+      var dwellRows = Object.keys(byDwell).sort().map(function (k) { return { label: k, value: avg(byDwell[k]), display: fmtMins(avg(byDwell[k])) }; });
+      barChart($('#chartDwell'), dwellRows);
+
+      /* Month comparison table */
+      var agg = {};
+      visits.forEach(function (v) {
+        var m = moOf(v.closed || v.seated);
+        agg[m] = agg[m] || { visits: 0, parties: [], dwell: [] };
+        agg[m].visits++; agg[m].parties.push(v.party || 1); agg[m].dwell.push(((v.closed || v.seated) - v.seated) / 60000);
+      });
+      orders.forEach(function (o) {
+        if (!o.doneAt) return;
+        var m = moOf(o.doneAt);
+        agg[m] = agg[m] || { visits: 0, parties: [], dwell: [], prep: [] };
+        agg[m].prep = agg[m].prep || [];
+        agg[m].prep.push((o.doneAt - o.sent) / 60000);
+      });
+      var body = $('#monthTableBody');
+      body.innerHTML = Object.keys(agg).sort().map(function (m) {
+        var r = agg[m];
+        return '<tr class="border-t border-outline-variant/10">' +
+          '<td class="py-3 pr-3 font-body-md text-body-md text-primary">' + moLabel(m) + '</td>' +
+          '<td class="py-3 pr-3 text-center font-body-md text-body-md text-on-surface">' + r.visits + '</td>' +
+          '<td class="py-3 pr-3 text-center font-body-md text-body-md text-on-surface">' + avg(r.parties).toFixed(1) + '</td>' +
+          '<td class="py-3 pr-3 text-center font-body-md text-body-md text-on-surface">' + (r.prep && r.prep.length ? fmtMins(avg(r.prep)) : '—') + '</td>' +
+          '<td class="py-3 text-center font-body-md text-body-md text-on-surface">' + fmtMins(avg(r.dwell)) + '</td>' +
+        '</tr>';
+      }).join('') || '<tr><td class="py-3 font-body-md text-body-md text-on-surface-variant" colspan="5">Sin datos.</td></tr>';
+    }
+
+    sel.addEventListener('change', render);
+    render();
+  }
+  if ($('#analyticsRoot')) analyticsApp();
 
   /* =========================================================
    * Settings (settings.html) — chambu_settings
@@ -934,15 +1151,11 @@
       if (el) el.value = val;
     }
     set('restaurant', s.restaurant);
-    set('tax', s.tax);
-    set('service', s.service);
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       saveSettings({
-        restaurant: ($('[name="restaurant"]', form).value.trim() || 'Chambú Kitchen & Bar'),
-        tax: parseFloat($('[name="tax"]', form).value) || 0,
-        service: parseFloat($('[name="service"]', form).value) || 0
+        restaurant: ($('[name="restaurant"]', form).value.trim() || 'Chambú Kitchen & Bar')
       });
       showToast('Settings saved', true);
     });
@@ -950,10 +1163,8 @@
     var reset = $('#btnResetSettings');
     if (reset) {
       reset.addEventListener('click', function () {
-        saveSettings({ restaurant: 'Chambú Kitchen & Bar', tax: 8.5, service: 18 });
+        saveSettings({ restaurant: 'Chambú Kitchen & Bar' });
         set('restaurant', 'Chambú Kitchen & Bar');
-        set('tax', 8.5);
-        set('service', 18);
         showToast('Settings reset to defaults', true);
       });
     }

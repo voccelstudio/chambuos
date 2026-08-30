@@ -7,11 +7,12 @@ Restaurant management web app. Runs entirely in the browser and is deployed to *
 | Pagina          | Archivo          | Descripcion                                             |
 | --------------- | ---------------- | ------------------------------------------------------- |
 | Floor Map       | `index.html`     | Mapa de mesas interactivo (abre un ticket en el POS).   |
-| POS & Billing   | `pos.html`       | Ticket, totales, split bill, "Send to Kitchen" y flujo de pago (tarjeta/efectivo). |
+| POS & Billing   | `pos.html`       | Ticket (Gs., IVA incluido), personas por mesa, split bill, "Send to Kitchen" y flujo de pago (tarjeta/efectivo). |
 | Menu Editor     | `menu.html`      | Categorias, busqueda y alternar disponibilidad (86'd).  |
 | Bar & Inventory | `inventory.html` | Stock, filtros y Quick Restock.                         |
 | Kitchen Display | `kitchen.html`   | Tablero de cocina (New / In Progress / Ready / Done) alimentado por el POS. |
-| Settings        | `settings.html`  | Nombre del negocio, tasa de impuesto y cargo por servicio (aplicados en el POS). |
+| Analytics       | `analytics.html` | Data: mas vendidos, personas/tiempo por mesa y comparacion por mes. |
+| Settings        | `settings.html`  | Nombre del negocio (mostrado en el header).             |
 | Support         | `support.html`   | FAQ y reporte de issues en GitHub.                      |
 
 ## Nota: layout compartido
@@ -34,7 +35,13 @@ El prototipo guarda todo en `localStorage` (sin servidor):
 | `chambu_inventory_stock` | Overrides de stock tras Quick Restock.          |
 | `chambu_orders`          | Tickets enviados a Kitchen Display.             |
 | `chambu_ticket_next`     | Correlativo de tickets del POS.                 |
-| `chambu_settings`        | Nombre, impuesto y servicio (Settings).         |
+| `chambu_settings`        | Nombre del negocio (Settings).                  |
+| `chambu_current_visit`   | Visita abierta del POS (mesa + personas + hora de entrada). |
+| `chambu_visits`          | Historico de visitas cerradas (analytics).      |
+| `chambu_tables_party`    | Personas por mesa del floor map.                |
+| `chambu_analytics_orders`| Comandas historicas de ejemplo (analytics).     |
+
+La moneda es Guaranies (`Gs.`) y todos los precios incluyen IVA (no hay impuestos extra en el ticket).
 
 > Limpiar los datos del navegador reinicia el demo.
 

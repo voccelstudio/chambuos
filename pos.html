@@ -32,6 +32,15 @@
 <span class="font-label-md text-label-md">Open</span>
 </div>
 </div>
+<!-- Party size -->
+<div class="px-4 py-3 border-b border-outline-variant/10 flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider flex items-center gap-2"><span class="material-symbols-outlined">groups</span>People at table</span>
+<div class="flex items-center gap-2">
+<button class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-center transition-colors" id="btnPartyMinus" aria-label="Remove one person"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="w-8 text-center font-title-lg text-title-lg text-primary" id="partyCount">2</span>
+<button class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed flex items-center justify-center transition-colors" id="btnPartyPlus" aria-label="Add one person"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+</div>
 <!-- Quick Add -->
 <div class="px-4 py-3 border-b border-outline-variant/10 flex gap-2">
 <div class="flex-1">
@@ -54,7 +63,7 @@
 <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Medium Rare • No Butter</p>
 </div>
 <div class="text-right ml-4">
-<span class="font-body-lg text-body-lg text-primary">$85.00</span>
+<span class="font-body-lg text-body-lg text-primary">Gs. 85</span>
 </div>
 </div>
 </div>
@@ -66,7 +75,7 @@
 <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Parmesan, Aioli on side</p>
 </div>
 <div class="text-right ml-4">
-<span class="font-body-lg text-body-lg text-primary">$14.00</span>
+<span class="font-body-lg text-body-lg text-primary">Gs. 14</span>
 </div>
 </div>
 </div>
@@ -81,7 +90,7 @@
 <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Woodford Reserve</p>
 </div>
 <div class="text-right ml-4">
-<span class="font-body-lg text-body-lg text-primary">$36.00</span>
+<span class="font-body-lg text-body-lg text-primary">Gs. 36</span>
 </div>
 </div>
 </div>
@@ -91,20 +100,13 @@
 <div class="space-y-3 mb-6">
 <div class="flex justify-between items-center text-on-surface-variant">
 <span class="font-body-md text-body-md">Subtotal</span>
-<span class="font-body-md text-body-md" id="ticketSubtotal">$135.00</span>
-</div>
-<div class="flex justify-between items-center text-on-surface-variant">
-<span class="font-body-md text-body-md" id="taxLabel">Tax (8.5%)</span>
-<span class="font-body-md text-body-md" id="ticketTax">$11.48</span>
-</div>
-<div class="flex justify-between items-center text-on-surface-variant">
-<span class="font-body-md text-body-md" id="serviceLabel">Service Charge (18%)</span>
-<span class="font-body-md text-body-md" id="ticketService">$24.30</span>
+<span class="font-body-md text-body-md" id="ticketSubtotal">Gs. 135</span>
 </div>
 <div class="pt-4 border-t border-outline-variant/20 flex justify-between items-end">
 <span class="font-title-lg text-title-lg text-primary">Total</span>
-<span class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight" id="ticketTotal">$170.78</span>
+<span class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight" id="ticketTotal">Gs. 170,78</span>
 </div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-2">Precios con IVA incluido.</p>
 <p class="font-label-sm text-label-sm text-tertiary-fixed-dim hidden mt-2" id="splitNote"></p>
 </div>
 <button class="w-full mb-3 bg-secondary-container/20 border border-secondary-container/30 text-secondary-container hover:bg-secondary-container/30 font-label-md text-label-md py-3 rounded-lg uppercase tracking-wider transition-colors flex items-center justify-center gap-2" id="btnSendOrder">
@@ -160,7 +162,7 @@
 <div class="bg-surface p-6 rounded-lg border border-outline-variant/10">
 <div class="flex justify-between items-center mb-4">
 <span class="font-body-lg text-body-lg text-on-surface-variant">Amount Due</span>
-<span class="font-title-lg text-title-lg text-primary" id="payAmount">$170.78</span>
+<span class="font-title-lg text-title-lg text-primary" id="payAmount">Gs. 170,78</span>
 </div>
 <div class="w-full bg-surface-container-highest rounded-full h-1.5 mb-6 overflow-hidden">
 <div class="bg-primary-container h-1.5 rounded-full w-0 transition-all duration-100" id="payProgressBar"></div>
@@ -184,7 +186,7 @@
 <div class="mt-6 bg-surface p-6 rounded-lg border border-outline-variant/10">
 <div class="flex justify-between items-center">
 <span class="font-body-lg text-body-lg text-on-surface-variant">Total Paid</span>
-<span class="font-title-lg text-title-lg text-primary" id="payAmountSuccess">$170.78</span>
+<span class="font-title-lg text-title-lg text-primary" id="payAmountSuccess">Gs. 170,78</span>
 </div>
 </div>
 <div class="flex gap-4 mt-8">
