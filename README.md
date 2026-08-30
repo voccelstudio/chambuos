@@ -10,6 +10,7 @@ Restaurant management web app. Runs entirely in the browser and is deployed to *
 | POS & Billing   | `pos.html`       | Ticket (Gs., IVA incluido), personas por mesa, split bill, "Send to Kitchen" y flujo de pago (tarjeta/efectivo). |
 | Menu Editor     | `menu.html`      | Categorias, busqueda y alternar disponibilidad (86'd).  |
 | Bar & Inventory | `inventory.html` | Stock, filtros y Quick Restock.                         |
+| Shopping List   | `shopping.html` | Lista de compras de ingredientes (Cocina y Bar), con sugerencias de stock bajo. |
 | Kitchen Display | `kitchen.html`   | Tablero de cocina (New / In Progress / Ready / Done) alimentado por el POS. |
 | Analytics       | `analytics.html` | Data: mas vendidos, personas/tiempo por mesa y comparacion por mes. |
 | Settings        | `settings.html`  | Nombre del negocio (mostrado en el header).             |
@@ -33,6 +34,7 @@ El prototipo guarda todo en `localStorage` (sin servidor):
 | `chambu_inventory_items` | Items de stock agregados en Bar & Inventory.    |
 | `chambu_inventory_deleted` | Items de stock eliminados.                    |
 | `chambu_inventory_stock` | Overrides de stock tras Quick Restock.          |
+| `chambu_shopping`        | Lista de compras (Shopping List).                |
 | `chambu_orders`          | Tickets enviados a Kitchen Display.             |
 | `chambu_ticket_next`     | Correlativo de tickets del POS.                 |
 | `chambu_settings`        | Nombre del negocio (Settings).                  |

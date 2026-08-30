@@ -10,6 +10,7 @@
     { page: 'pos.html', icon: 'receipt_long', label: 'POS & Billing' },
     { page: 'menu.html', icon: 'restaurant_menu', label: 'Menu Editor' },
     { page: 'inventory.html', icon: 'liquor', label: 'Bar & Inventory' },
+    { page: 'shopping.html', icon: 'shopping_cart', label: 'Shopping List' },
     { page: 'kitchen.html', icon: 'oven_gen', label: 'Kitchen Display' },
     { page: 'analytics.html', icon: 'monitoring', label: 'Analytics' },
     { page: 'settings.html', icon: 'settings', label: 'Settings' },
@@ -614,6 +615,229 @@
     });
   }
   if ($('#btnAddItem') && $('#invGrid')) inventoryItemsApp();
+
+  /* =========================================================
+   * Shopping List (shopping.html) — chambu_shopping
+   * Ingredient purchases for Kitchen and Bar
+   * ========================================================= */
+  function shoppingApp() {
+    var STORE = 'chambu_shopping';
+    var LOW = 3;
+    var search = $('#shopSearch');
+    var listEl = $('#shopList');
+    var list = storeGet(STORE, []);
+    if (storeGet(STORE) === null) {
+      list = [
+        { id: 's1', name: 'Harina 0000', cat: 'kitchen', qty: 5, unit: 'kg', done: false },
+        { id: 's2', name: 'Papas', cat: 'kitchen', qty: 4, unit: 'kg', done: false },
+        { id: 's3', name: 'Cebolla', cat: 'kitchen', qty: 2, unit: 'kg', done: false },
+        { id: 's4', name: 'Ajo', cat: 'kitchen', qty: 500, unit: 'g', done: false },
+        { id: 's5', name: 'Crema de leche', cat: 'kitchen', qty: 6, unit: 'ctns', done: true },
+        { id: 's6', name: 'Gin', cat: 'bar', qty: 3, unit: 'btls', done: false },
+        { id: 's7', name: 'Campari', cat: 'bar', qty: 2, unit: 'btls', done: false },
+        { id: 's8', name: 'Jugo de naranja', cat: 'bar', qty: 4, unit: 'ctns', done: false }
+      ];
+      storeSet(STORE, list);
+    }
+
+    var COMMON = [
+      { name: 'Harina 0000', unit: 'kg', cat: 'kitchen' },
+      { name: 'Papas', unit: 'kg', cat: 'kitchen' },
+      { name: 'Cebolla', unit: 'kg', cat: 'kitchen' },
+      { name: 'Ajo', unit: 'g', cat: 'kitchen' },
+      { name: 'Manteca', unit: 'kg', cat: 'kitchen' },
+      { name: 'Crema de leche', unit: 'ctns', cat: 'kitchen' },
+      { name: 'Queso Paraguay', unit: 'kg', cat: 'kitchen' },
+      { name: 'Tomate', unit: 'kg', cat: 'kitchen' },
+      { name: 'Carne picada', unit: 'kg', cat: 'kitchen' },
+      { name: 'Pollo', unit: 'kg', cat: 'kitchen' },
+      { name: 'Gin', unit: 'btls', cat: 'bar' },
+      { name: 'Campari', unit: 'btls', cat: 'bar' },
+      { name: 'Jugo de naranja', unit: 'ctns', cat: 'bar' },
+      { name: 'Limón', unit: 'kg', cat: 'bar' },
+      { name: 'Menta', unit: 'bunches', cat: 'bar' },
+      { name: 'Hielo', unit: 'bags', cat: 'bar' }
+    ];
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function byId(id) { for (var i = 0; i < list.length; i++) if (String(list[i].id) === String(id)) return list[i]; return null; }
+    function save() { storeSet(STORE, list); }
+
+    function activeVal() {
+      var t = $('[data-shop-filter].active');
+      return t ? t.getAttribute('data-shop-filter') : 'all';
+    }
+
+    function catLabel(c) { return c === 'kitchen' ? 'Cocina' : 'Bar'; }
+    function catBadge(c) {
+      return c === 'kitchen'
+        ? 'bg-tertiary-container/15 text-tertiary-fixed-dim border border-tertiary-fixed-dim/30'
+        : 'bg-primary-container/15 text-primary-fixed-dim border border-primary-fixed-dim/30';
+    }
+
+    function rowHtml(it) {
+      return '<div class="flex items-center gap-3 p-4 rounded-xl border bg-surface transition-colors ' +
+        (it.done ? 'border-tertiary-container/30 opacity-70' : 'border-outline-variant/10 hover:border-primary-container/40') +
+        '" data-shop-item>' +
+        '<button class="shop-toggle w-7 h-7 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ' +
+          (it.done ? 'bg-tertiary-container border-tertiary-container text-on-tertiary-container' : 'border-outline-variant hover:border-tertiary-container text-transparent') +
+          '" title="Marcar como comprado" data-shop-toggle="' + it.id + '">' +
+          '<span class="material-symbols-outlined text-[16px]">check</span>' +
+        '</button>' +
+        '<div class="flex-1 min-w-0">' +
+          '<h3 class="font-body-lg text-body-lg font-semibold pt-1 ' + (it.done ? 'line-through text-on-surface-variant' : 'text-on-surface') + '">' + esc(it.name) + '</h3>' +
+          '<span class="inline-block px-2 py-0.5 rounded font-label-sm text-label-sm mt-1 ' + catBadge(it.cat) + '">' + catLabel(it.cat) + '</span>' +
+        '</div>' +
+        '<div class="flex items-center gap-1">' +
+          '<button class="shop-minus w-8 h-8 rounded-full bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-center transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">remove</span></button>' +
+          '<span class="w-16 text-center font-body-lg text-body-lg text-on-surface truncate" data-shop-qty>' + esc(it.qty) + ' ' + esc(it.unit || '') + '</span>' +
+          '<button class="shop-plus w-8 h-8 rounded-full bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-center transition-colors text-on-surface"><span class="material-symbols-outlined text-[16px]">add</span></button>' +
+        '</div>' +
+        '<button class="shop-del text-on-surface-variant hover:text-error transition-colors shrink-0" title="Eliminar item"><span class="material-symbols-outlined text-[18px]">close</span></button>' +
+      '</div>';
+    }
+
+    function render() {
+      var active = activeVal();
+      var q = (search && search.value ? search.value.toLowerCase() : '');
+      var rows = list.filter(function (it) {
+        if (active === 'kitchen' || active === 'bar') { if (it.cat !== active) return false; }
+        else if (active === 'todo') { if (it.done) return false; }
+        else if (active === 'done') { if (!it.done) return false; }
+        if (q) { if ((it.name + ' ' + catLabel(it.cat)).toLowerCase().indexOf(q) === -1) return false; }
+        return true;
+      });
+      listEl.innerHTML = rows.length
+        ? rows.map(rowHtml).join('')
+        : '<div class="glass-panel rounded-xl p-8 text-center border border-outline-variant/10">' +
+            '<span class="material-symbols-outlined text-4xl text-on-surface-variant">shopping_cart</span>' +
+            '<p class="font-body-md text-body-md text-on-surface-variant mt-3">No hay items en la lista.</p>' +
+            '<p class="font-label-sm text-label-sm text-on-surface-variant">Agrega uno con "Add Item" o probá "Suggest".</p>' +
+          '</div>';
+      var toBuy = list.filter(function (it) { return !it.done; }).length;
+      var bought = list.length - toBuy;
+      var tb = $('#shopToBuy'); if (tb) tb.textContent = String(toBuy);
+      var bb = $('#shopBought'); if (bb) bb.textContent = String(bought);
+    }
+
+    $('#shopItemModal').addEventListener('click', function (e) { if (e.target === this) modalHide('#shopItemModal'); });
+    $('#shopSuggestModal').addEventListener('click', function (e) { if (e.target === this) modalHide('#shopSuggestModal'); });
+
+    $$('[data-shop-filter]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        $$('[data-shop-filter]').forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        render();
+      });
+    });
+    if (search) search.addEventListener('input', render);
+
+    $('#btnAddShop').addEventListener('click', function () { modalShow('#shopItemModal'); });
+
+    $('#shopSave').addEventListener('click', function () {
+      var name = $('#shopName').value.trim();
+      var cat = $('#shopCat').value;
+      var qty = parseFloat($('#shopQty').value);
+      if (!name || isNaN(qty) || qty <= 0) { showToast('Enter a name and a valid quantity', false); return; }
+      var unit = $('#shopUnit').value.trim();
+      var existing = null;
+      list.forEach(function (it) { if (it.name.toLowerCase() === name.toLowerCase()) existing = it; });
+      if (existing) {
+        existing.qty += qty;
+        if (unit) existing.unit = unit;
+        showToast('"' + name + '" +' + qty + ' (ya estaba en la lista)', true);
+      } else {
+        list.push({ id: 's' + Date.now() + Math.floor(Math.random() * 1000), name: name, cat: cat === 'bar' ? 'bar' : 'kitchen', qty: qty, unit: unit || 'pcs', done: false });
+        showToast('Added "' + name + '"', true);
+      }
+      save(); render();
+      modalHide('#shopItemModal');
+      $('#shopName').value = ''; $('#shopQty').value = '1'; $('#shopUnit').value = '';
+    });
+
+    document.addEventListener('click', function (e) {
+      var row = e.target.closest('[data-shop-item]');
+      if (!row) return;
+      var toggle = e.target.closest('.shop-toggle');
+      var minus = e.target.closest('.shop-minus');
+      var plus = e.target.closest('.shop-plus');
+      var del = e.target.closest('.shop-del');
+      if (!toggle && !minus && !plus && !del) return;
+      var it = byId(toggle ? toggle.getAttribute('data-shop-toggle') : '');
+      if (toggle) {
+        if (it) { it.done = !it.done; save(); render(); showToast('"' + it.name + '" ' + (it.done ? 'comprado' : 'marcado como pendiente'), true); }
+        return;
+      }
+      var id = row.getAttribute('data-shop-item');
+      var name = ($('h3', row) || { textContent: '' }).textContent;
+      it = byId(id);
+      if (minus && it) { it.qty = Math.max(1, it.qty - 1); save(); render(); }
+      else if (plus && it) { it.qty += 1; save(); render(); }
+      else if (del) {
+        if (it) { list.splice(list.indexOf(it), 1); save(); render(); showToast('Removed "' + name + '"', true); }
+      }
+    });
+
+    var btnClear = $('#btnClearBought');
+    if (btnClear) btnClear.addEventListener('click', function () {
+      list = list.filter(function (it) { return !it.done; });
+      save(); render();
+      showToast('Comprados eliminados', true);
+    });
+
+    /* Suggestion flow: low stock (from inventory) + common ingredients */
+    function lowStockSuggestions() {
+      var over = storeGet('chambu_inventory_stock', {});
+      return storeGet('chambu_inventory_items', []).filter(function (it) {
+        var stock = over.hasOwnProperty(it.name) ? over[it.name] : it.stock;
+        return stock <= LOW;
+      }).map(function (it) { return { name: it.name, unit: it.unit || 'pcs', cat: 'bar' }; });
+    }
+
+    function suggestRow(s, checked) {
+      return '<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer">' +
+        '<input type="checkbox" class="suggest-check accent-[#bdf19c] w-4 h-4"' + (checked ? ' checked' : '') + ' data-suggest-name="' + esc(s.name) + '" data-suggest-cat="' + s.cat + '" data-suggest-unit="' + esc(s.unit) + '">' +
+        '<span class="font-body-md text-body-md text-on-surface flex-1">' + esc(s.name) + '</span>' +
+        '<span class="font-label-sm text-label-sm text-on-surface-variant">' + esc(s.unit) + ' • ' + catLabel(s.cat) + '</span>' +
+      '</label>';
+    }
+
+    $('#btnSuggest').addEventListener('click', function () {
+      var low = lowStockSuggestions();
+      $('#shopSuggestLow').innerHTML = low.length
+        ? low.map(function (s) { return suggestRow(s, list.some(function (it) { return it.name.toLowerCase() === s.name.toLowerCase(); })); }).join('')
+        : '<p class="font-body-md text-body-md text-on-surface-variant p-2">Nada por debajo del PAR en el inventario.</p>';
+      $('#shopSuggestCommon').innerHTML = COMMON.map(function (s) {
+        return suggestRow(s, list.some(function (it) { return it.name.toLowerCase() === s.name.toLowerCase(); }));
+      }).join('');
+      modalShow('#shopSuggestModal');
+    });
+
+    $('#btnAddSuggest').addEventListener('click', function () {
+      var picked = $$('input.suggest-check:checked');
+      if (!picked.length) { showToast('Select at least one item', false); return; }
+      var added = 0;
+      picked.forEach(function (cb) {
+        var name = cb.getAttribute('data-suggest-name');
+        var cat = cb.getAttribute('data-suggest-cat') === 'bar' ? 'bar' : 'kitchen';
+        var unit = cb.getAttribute('data-suggest-unit') || 'pcs';
+        var existing = null;
+        list.forEach(function (it) { if (it.name.toLowerCase() === name.toLowerCase()) existing = it; });
+        if (existing) { existing.qty += 1; }
+        else {
+          list.push({ id: 's' + Date.now() + Math.floor(Math.random() * 1000) + added, name: name, cat: cat, qty: 1, unit: unit, done: false });
+        }
+        added++;
+      });
+      save(); render(); modalHide('#shopSuggestModal');
+      showToast('Added ' + added + ' item(s) to the list', true);
+    });
+
+    render();
+  }
+  if ($('#shoppingRoot')) shoppingApp();
 
   function getSettings() {
     var d = { restaurant: 'Chambú Kitchen & Bar' };

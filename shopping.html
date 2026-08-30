@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping List - Chambú Kitchen &amp; Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/tailwind.css" rel="stylesheet"/>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen overflow-hidden flex flex-col md:flex-row" id="shoppingRoot">
+<!-- TopNavBar (Mobile, injected by assets/js/app.js) -->
+<div data-layout-topbar></div>
+<!-- SideNavBar (Desktop, injected by assets/js/app.js) -->
+<div data-layout-sidebar></div>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full bg-surface relative overflow-hidden">
+<!-- Header / Toolbar -->
+<div class="px-margin-mobile md:px-margin-desktop py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant/10 bg-surface z-10">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-1">Shopping List</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Ingredientes para comprar — Cocina y Bar.</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-3">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 text-on-surface rounded-full py-2 pl-10 pr-4 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all font-body-md text-sm placeholder:text-on-surface-variant/50" id="shopSearch" placeholder="Search list..." type="text"/>
+</div>
+<button class="w-full sm:w-auto h-12 px-6 bg-surface border border-outline-variant/40 text-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-colors active:scale-95" id="btnSuggest">
+<span class="material-symbols-outlined text-sm">auto_awesome</span> Suggest
+                </button>
+<button class="w-full sm:w-auto h-12 px-6 bg-primary-container text-on-primary-container font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-colors active:scale-95 shadow-sm" id="btnAddShop">
+<span class="material-symbols-outlined text-sm">add</span> Add Item
+                </button>
+</div>
+</div>
+<!-- Filters -->
+<div class="px-margin-mobile md:px-margin-desktop py-4 flex gap-2 overflow-x-auto hide-scrollbar border-b border-outline-variant/5 bg-surface-container-lowest z-10">
+<button class="filter-btn active px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-shop-filter="all">All</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-shop-filter="kitchen">Cocina</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-shop-filter="bar">Bar</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-outline-variant/50 text-on-surface-variant hover:border-primary-container hover:text-primary-container font-label-md text-label-md whitespace-nowrap transition-colors" data-shop-filter="todo">Para comprar</button>
+<button class="filter-btn px-4 py-2 rounded-full border border-primary-container/50 text-tertiary-fixed-dim hover:border-tertiary-container hover:text-tertiary-fixed-dim font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1" data-shop-filter="done">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Comprado
+            </button>
+</div>
+<!-- Summary strip -->
+<div class="px-margin-mobile md:px-margin-desktop py-3 flex items-center justify-between border-b border-outline-variant/5 bg-surface z-10">
+<div class="flex items-center gap-4 font-label-md text-label-md text-on-surface-variant">
+<span>Para comprar: <span class="text-primary font-bold" id="shopToBuy">0</span></span>
+<span class="text-tertiary-fixed-dim">Comprado: <span class="font-bold" id="shopBought">0</span></span>
+</div>
+<button class="text-on-surface-variant hover:text-error font-label-md text-label-md uppercase tracking-wider transition-colors flex items-center gap-1" id="btnClearBought">
+<span class="material-symbols-outlined text-[16px]">delete_sweep</span> Limpiar comprados
+            </button>
+</div>
+<!-- List -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop">
+<div class="max-w-3xl mx-auto space-y-2" id="shopList"></div>
+</div>
+</main>
+<!-- Add Item Modal -->
+<div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="shopItemModal">
+<div class="w-full max-w-md bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-md text-headline-md text-primary">Add to Shopping List</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="shopItemModal"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-4">
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Ingredient</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="shopName" type="text" placeholder="e.g. Queso Paraguay"/>
+</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Area</span>
+<select class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container transition-colors" id="shopCat">
+<option value="kitchen">Cocina</option>
+<option value="bar">Bar</option>
+</select>
+</label>
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Cantidad</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="shopQty" type="number" min="1" step="1" value="1"/>
+</label>
+</div>
+<label class="block">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">Unidad (kg, g, btls...)</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container transition-colors" id="shopUnit" type="text" placeholder="kg"/>
+</label>
+<div class="flex justify-end gap-3 pt-2">
+<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="shopItemModal">Cancel</button>
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 px-8 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg" id="shopSave">
+<span class="material-symbols-outlined text-[18px] inline-block align-middle mr-1">save</span>
+                                Add item
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Suggest Modal -->
+<div class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/60 backdrop-blur-md" id="shopSuggestModal">
+<div class="w-full max-w-lg bg-surface-container-low border border-outline-variant/10 rounded-xl p-6 shadow-2xl relative z-10 max-h-[85vh] flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-md text-headline-md text-primary">Suggestions</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors" data-close-modal="shopSuggestModal"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-5 overflow-y-auto pr-1 hide-scrollbar">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-error">warning</span> Stock bajo (de tu inventario)</h3>
+<div class="space-y-1" id="shopSuggestLow"></div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-2 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">checklist</span> Ingredientes comunes</h3>
+<div class="space-y-1" id="shopSuggestCommon"></div>
+</div>
+</div>
+<div class="flex justify-end gap-3 pt-4 border-t border-outline-variant/10 mt-4">
+<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors" data-close-modal="shopSuggestModal">Cancel</button>
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 px-8 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg" id="btnAddSuggest">
+<span class="material-symbols-outlined text-[18px] inline-block align-middle mr-1">playlist_add</span>
+                                        Add selected
+                                    </button>
+</div>
+</div>
+</div>
+<script src="assets/js/app.js"></script>
+</body></html>
