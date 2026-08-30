@@ -12,65 +12,12 @@
 <link href="assets/css/styles.css" rel="stylesheet"/>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row overflow-hidden">
-<!-- SideNavBar -->
-<nav class="hidden md:flex flex-col h-full w-64 py-base gap-2 bg-surface-container dark:bg-surface-container border-r border-outline-variant/10 z-20 shrink-0">
-<div class="px-4 py-4 flex items-center gap-4 mb-4">
-<img alt="Chambú Logo" class="w-12 h-12 rounded-full object-cover border border-outline-variant/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4ecOo1YMfjxeYz6KrP9K_RxJzXmIqPAK-lja-PLppsaeMhvwCPXIDrbpfO2j9UrPNRG7tJ5Y3hhkOxG7vagwEjcF5JGvmrd4TS2tPvtlVYb3QOjWFtMdnclO_gtDHw-gKpMeHMiz4VR8wld3Qqb1hJAOPFYTNxZD9jEys61CeN6EmBzcKfNwShfsmHhZxszGQXS5JZOg_KyxzF1Sg5r9iimDNr4TqdlHRdmQrHHa4gDnojojZZqRy71lQsn0uORKpeQ"/>
-<div>
-<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Chambú</h1>
-<p class="font-label-md text-label-md text-on-surface-variant">Kitchen &amp; Bar</p>
-</div>
-</div>
-<div class="flex-1 overflow-y-auto px-2 space-y-1">
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="index.html" href="index.html">
-<span class="material-symbols-outlined">grid_view</span>
-<span class="font-label-md text-label-md">Floor Map</span>
-</a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="pos.html" href="pos.html">
-<span class="material-symbols-outlined">receipt_long</span>
-<span class="font-label-md text-label-md">POS &amp; Billing</span>
-</a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="menu.html" href="menu.html">
-<span class="material-symbols-outlined">restaurant_menu</span>
-<span class="font-label-md text-label-md">Menu Editor</span>
-</a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" data-nav="inventory.html" href="inventory.html">
-<span class="material-symbols-outlined">liquor</span>
-<span class="font-label-md text-label-md">Bar &amp; Inventory</span>
-</a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" href="#">
-<span class="material-symbols-outlined">oven_gen</span>
-<span class="font-label-md text-label-md">Kitchen Display</span>
-</a>
-</div>
-<div class="px-2 mt-auto border-t border-outline-variant/10 pt-4 space-y-1">
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-label-md text-label-md">Settings</span>
-</a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg" href="#">
-<span class="material-symbols-outlined">help_outline</span>
-<span class="font-label-md text-label-md">Support</span>
-</a>
-</div>
-</nav>
+<!-- SideNavBar (injected by assets/js/app.js) -->
+<div data-layout-sidebar></div>
 <!-- Main Content Area -->
 <main class="flex-1 flex flex-col relative min-w-0">
-<!-- TopNavBar (Mobile Only) -->
-<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-touch-target bg-surface dark:bg-surface border-b border-outline-variant/10 z-20">
-<div class="flex items-center gap-2">
-<img alt="Chambú Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7zOi1s9qJM5fXGufih3QALV_hs7yTnfMJzqtE1mzzbywAyPKZ07WWH0oTOfy40M7z1as-qdXe5sKtew1FIm9uM5VHzUytpqNwscmzGOgsh-7fDzguQYKn6QtCW0ARFy4hXk9trJc60GEoHPWnOmIVW8Bd2StdJAg6jmEovFtABKJmgDMQ7JrNCqmMSy4HlLKiNWHp0tibroMZyggOhFWdtwRFzyjWt1K6taCk6dWo2K9xH3WFPuOltqMXqdRIzmBbUA"/>
-<span class="font-headline-md text-headline-md text-primary dark:text-primary tracking-tight">Chambú Kitchen &amp; Bar</span>
-</div>
-<div class="flex items-center gap-4">
-<button class="text-on-surface-variant hover:bg-surface-bright/10 p-2 rounded-full transition-colors active:scale-95 duration-100">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="text-on-surface-variant hover:bg-surface-bright/10 p-2 rounded-full transition-colors active:scale-95 duration-100">
-<span class="material-symbols-outlined">person</span>
-</button>
-</div>
-</header>
+<!-- TopNavBar (Mobile Only, injected by assets/js/app.js) -->
+<div data-layout-topbar></div>
 <!-- Main Floor Plan View -->
 <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
 <!-- Floor Map Canvas -->

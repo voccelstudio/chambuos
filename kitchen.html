@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kitchen Display - Chambú Kitchen &amp; Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/tailwind.css" rel="stylesheet"/>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen overflow-hidden flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile, injected by assets/js/app.js) -->
+<div data-layout-topbar></div>
+<!-- SideNavBar (Desktop, injected by assets/js/app.js) -->
+<div data-layout-sidebar></div>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full bg-background relative overflow-hidden">
+<!-- Header / Toolbar -->
+<div class="px-margin-mobile md:px-margin-desktop py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant/10 bg-background z-10">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-1">Kitchen Display</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Live tickets from the POS. Advance each order as it's prepped.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">sync</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Auto-updates on load</span>
+</div>
+</div>
+<!-- Boards -->
+<div class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop py-6">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- Column: New -->
+<section class="flex flex-col min-h-[200px]">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_notes</span>
+<h2 class="font-title-lg text-title-lg text-primary">New</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm" id="countNew">0</span>
+</div>
+<div class="flex-1 space-y-3 rounded-xl border border-primary-container/20 bg-surface-container-low/40 p-3 overflow-y-auto hide-scrollbar" id="colNew">
+<div data-col="new"></div>
+</div>
+</section>
+<!-- Column: In Progress -->
+<section class="flex flex-col min-h-[200px]">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container">local_fire_department</span>
+<h2 class="font-title-lg text-title-lg text-primary">In Progress</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm" id="countIn">0</span>
+</div>
+<div class="flex-1 space-y-3 rounded-xl border border-secondary-container/20 bg-surface-container-low/40 p-3 overflow-y-auto hide-scrollbar" id="colIn">
+<div data-col="in"></div>
+</div>
+</section>
+<!-- Column: Ready -->
+<section class="flex flex-col min-h-[200px]">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container">room_service</span>
+<h2 class="font-title-lg text-title-lg text-primary">Ready</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm" id="countReady">0</span>
+</div>
+<div class="flex-1 space-y-3 rounded-xl border border-tertiary-container/20 bg-surface-container-low/40 p-3 overflow-y-auto hide-scrollbar" id="colReady">
+<div data-col="ready"></div>
+</div>
+</section>
+<!-- Column: Done -->
+<section class="flex flex-col min-h-[200px]">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
+<h2 class="font-title-lg text-title-lg text-primary">Done</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm" id="countDone">0</span>
+</div>
+<div class="flex-1 space-y-3 rounded-xl border border-outline-variant/20 bg-surface-container-low/40 p-3 overflow-y-auto hide-scrollbar" id="colDone">
+<div data-col="done"></div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="assets/js/app.js"></script>
+</body></html>

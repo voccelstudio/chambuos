@@ -7,9 +7,18 @@ Restaurant management web app. Runs entirely in the browser and is deployed to *
 | Pagina          | Archivo          | Descripcion                                             |
 | --------------- | ---------------- | ------------------------------------------------------- |
 | Floor Map       | `index.html`     | Mapa de mesas interactivo (abre un ticket en el POS).   |
-| POS & Billing   | `pos.html`       | Ticket, totales, split bill y flujo de pago (tarjeta/efectivo). |
+| POS & Billing   | `pos.html`       | Ticket, totales, split bill, "Send to Kitchen" y flujo de pago (tarjeta/efectivo). |
 | Menu Editor     | `menu.html`      | Categorias, busqueda y alternar disponibilidad (86'd).  |
 | Bar & Inventory | `inventory.html` | Stock, filtros y Quick Restock.                         |
+| Kitchen Display | `kitchen.html`   | Tablero de cocina (New / In Progress / Ready / Done) alimentado por el POS. |
+| Settings        | `settings.html`  | Nombre del negocio, tasa de impuesto y cargo por servicio (aplicados en el POS). |
+| Support         | `support.html`   | FAQ y reporte de issues en GitHub.                      |
+
+## Nota: layout compartido
+
+El sidebar y la barra superior son generados por `assets/js/app.js` (una sola fuente de verdad:
+marca, logo y enlaces). Cada pagina solo tiene `<div data-layout-sidebar>` y `<div data-layout-topbar>`.
+Para cambiar logo, nombre o links, edita las constantes `BRAND`, `LOGO` y `NAV` al inicio de `app.js`.
 
 ## Correr localmente
 

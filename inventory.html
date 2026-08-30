@@ -12,49 +12,10 @@
 <link href="assets/css/styles.css" rel="stylesheet"/>
 </head>
 <body class="bg-background text-on-background font-body-md h-screen overflow-hidden flex flex-col md:flex-row">
-<!-- TopNavBar (Mobile) -->
-<header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-touch-target bg-surface-container-low border-b border-outline-variant/10">
-<div class="font-headline-md text-headline-md text-primary tracking-tight truncate">Chambú Kitchen &amp; Bar</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" >notifications</span>
-<span class="material-symbols-outlined text-primary" >person</span>
-</div>
-</header>
-<!-- SideNavBar (Desktop) -->
-<nav class="hidden md:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant/10 py-base gap-2 shrink-0">
-<div class="px-4 py-4 flex items-center gap-3 mb-4">
-<img alt="Chambú Logo" class="w-10 h-10 rounded-full object-cover border border-outline-variant/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIu8cYl-GK_4Fil130lWM4okp63Dqdo2fnIT-tz4NhwWpt8ddNkCOqReHXJkCTbqr-3rSEa6Bgzqe1rUly4eukL42y-Wdpnd5LI70t__92ZFlJVLzOELCiSgPiSGPVPZrDOMkpQma_jo1xcKWjQxxiwSHry1duxt7ysY2806f-MQwFXisOdvEGxVRWVHNuWwdKkjF8SxxQaVddcIpNQYadGksnxrHKg12cvYYIexuIwbjndnDoD-nc7_qab0BGmCh90w"/>
-<div>
-<div class="font-headline-md text-headline-md text-primary leading-tight">Chambú</div>
-<div class="font-label-md text-label-md text-on-surface-variant">Kitchen &amp; Bar</div>
-</div>
-</div>
-<div class="flex-1 px-2 space-y-1 overflow-y-auto">
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="index.html" href="index.html">
-<span class="material-symbols-outlined" >grid_view</span> Floor Map
-            </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="pos.html" href="pos.html">
-<span class="material-symbols-outlined" >receipt_long</span> POS &amp; Billing
-            </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="menu.html" href="menu.html">
-<span class="material-symbols-outlined" >restaurant_menu</span> Menu Editor
-            </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" data-nav="inventory.html" href="inventory.html">
-<span class="material-symbols-outlined" >liquor</span> Bar &amp; Inventory
-            </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" href="#">
-<span class="material-symbols-outlined" >oven_gen</span> Kitchen Display
-            </a>
-</div>
-<div class="px-2 mt-auto space-y-1 pt-4 border-t border-outline-variant/10">
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" href="#">
-<span class="material-symbols-outlined" >settings</span> Settings
-            </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all rounded-lg font-label-md text-label-md active:translate-x-1 duration-200" href="#">
-<span class="material-symbols-outlined" >help_outline</span> Support
-            </a>
-</div>
-</nav>
+<!-- TopNavBar (Mobile, injected by assets/js/app.js) -->
+<div data-layout-topbar></div>
+<!-- SideNavBar (Desktop, injected by assets/js/app.js) -->
+<div data-layout-sidebar></div>
 <!-- Main Content Canvas -->
 <main class="flex-1 flex flex-col h-full bg-surface relative overflow-hidden">
 <!-- Header / Toolbar -->

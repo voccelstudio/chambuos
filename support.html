@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Support - Chambú Kitchen &amp; Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/tailwind.css" rel="stylesheet"/>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen overflow-hidden flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile, injected by assets/js/app.js) -->
+<div data-layout-topbar></div>
+<!-- SideNavBar (Desktop, injected by assets/js/app.js) -->
+<div data-layout-sidebar></div>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full bg-background relative overflow-hidden">
+<!-- Header / Toolbar -->
+<div class="px-margin-mobile md:px-margin-desktop py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant/10 bg-background z-10">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-1">Support</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Get help with the platform, or report an issue.</p>
+</div>
+</div>
+<!-- Support Body -->
+<div class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop py-8">
+<div class="max-w-2xl mx-auto space-y-6">
+<!-- Contact card -->
+<div class="glass-panel rounded-xl border border-outline-variant/10 p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary-container/20 border border-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+</div>
+<div class="flex-1">
+<h2 class="font-title-lg text-title-lg text-primary mb-1">Still need help?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Open an issue on the project repository and the team will take a look.</p>
+</div>
+<a class="bg-primary-container text-on-primary-container hover:bg-primary-fixed font-label-md text-label-md py-3 px-5 rounded-lg uppercase tracking-wider transition-colors font-bold shadow-lg inline-flex items-center gap-2 shrink-0" href="https://github.com/voccelstudio/chambuos/issues" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-[18px]">bug_report</span>
+                        Report an issue
+                    </a>
+</div>
+<!-- FAQ -->
+<div>
+<h2 class="font-title-lg text-title-lg text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">quiz</span> Frequently asked questions</h2>
+<div class="space-y-3">
+<details class="glass-panel rounded-xl border border-outline-variant/10 group">
+<summary class="flex justify-between items-center gap-3 px-4 py-4 cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Why is the sidebar the same on every screen?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="px-4 pb-4 font-body-md text-body-md text-on-surface-variant">The sidebar and top bar are injected from a single source of truth in <code class="text-primary">assets/js/app.js</code>, so brand and links stay identical across all tabs.</p>
+</details>
+<details class="glass-panel rounded-xl border border-outline-variant/10 group">
+<summary class="flex justify-between items-center gap-3 px-4 py-4 cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">How do tickets reach the kitchen?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="px-4 pb-4 font-body-md text-body-md text-on-surface-variant">In POS &amp; Billing, tap "Send to Kitchen". The order is stored in your browser and appears instantly in the Kitchen Display board under "New".</p>
+</details>
+<details class="glass-panel rounded-xl border border-outline-variant/10 group">
+<summary class="flex justify-between items-center gap-3 px-4 py-4 cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">How are tax and service charge calculated?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="px-4 pb-4 font-body-md text-body-md text-on-surface-variant">Rates come from Settings and are applied to every ticket in the POS. Change them any time — tickets recalculate immediately.</p>
+</details>
+<details class="glass-panel rounded-xl border border-outline-variant/10 group">
+<summary class="flex justify-between items-center gap-3 px-4 py-4 cursor-pointer list-none">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Where is my data stored?</span>
+<span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="px-4 pb-4 font-body-md text-body-md text-on-surface-variant">This prototype stores everything locally in your browser (localStorage) — no account needed. Clearing browser data resets the app.</p>
+</details>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script src="assets/js/app.js"></script>
+</body></html>
